@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #3e7fe8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cis.pkg454.project.LoginPageController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="192.0" layoutY="124.0" prefHeight="63.0" prefWidth="389.0" text="Book Market" textAlignment="CENTER">
+         <font>
+            <Font name="Kefa Regular" size="60.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="usernameField" layoutX="263.0" layoutY="225.0" prefHeight="30.0" prefWidth="254.0" promptText="Username">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextArea>
+      <TextArea fx:id="passwordField" layoutX="263.0" layoutY="279.0" prefHeight="30.0" prefWidth="254.0" promptText="Password">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextArea>
+      <Button fx:id="loginButton" layoutX="361.0" layoutY="337.0" mnemonicParsing="false" onAction="#login" text="Log In!" />
+      <Label fx:id="registerLink" alignment="CENTER" layoutX="264.0" layoutY="375.0" onMouseClicked="#toRegisterPage" prefHeight="17.0" prefWidth="254.0" text="Don't have an account? Register Here!" textFill="#e18d48" underline="true" />
+   </children>
+</AnchorPane>
