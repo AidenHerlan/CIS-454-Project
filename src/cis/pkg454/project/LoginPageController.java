@@ -40,11 +40,9 @@ public class LoginPageController implements Initializable {
     @FXML
     void toRegisterPage(Event event) throws Exception {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        double windowWidth = window.getWidth();
-        double windowHeight = window.getHeight();
         
         Parent registerParent = FXMLLoader.load(getClass().getResource("RegisterPage.fxml"));
-        Scene registerScene = new Scene(registerParent, windowWidth, windowHeight);
+        Scene registerScene = new Scene(registerParent);
         
         window.setScene(registerScene);
         window.show();

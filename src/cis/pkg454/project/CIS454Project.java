@@ -12,7 +12,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
+ * Acts as the Server between the front end and back end
+ * Launches GUI
  * @author OliviaFlynn
  */
 public class CIS454Project extends Application {
@@ -25,6 +26,7 @@ public class CIS454Project extends Application {
         
         stage.setTitle("Buy or Sell Textbooks Here!!!");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
