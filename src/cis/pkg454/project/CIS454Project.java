@@ -24,7 +24,7 @@ public class CIS454Project extends Application {
         
         Scene scene = new Scene(root);
         
-        stage.setTitle("Buy or Sell Textbooks Here!!!");
+        stage.setTitle("Sell or Sell Textbooks Here!!!");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
