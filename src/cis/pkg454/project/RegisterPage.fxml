@@ -7,19 +7,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #3e7fe8;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="cis.pkg454.project.RegisterPageController">
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #3e7fe8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cis.pkg454.project.RegisterPageController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="179.0" layoutY="75.0" prefHeight="63.0" prefWidth="389.0" text="Book Market" textAlignment="CENTER">
          <font>
             <Font name="Kefa Regular" size="60.0" />
          </font>
       </Label>
-      <TextArea fx:id="passwordField" layoutX="251.0" layoutY="282.0" prefHeight="30.0" prefWidth="254.0" promptText="Password">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextArea>
       <TextArea fx:id="usernameField" layoutX="250.0" layoutY="233.0" prefHeight="30.0" prefWidth="254.0" promptText="Username">
          <font>
             <Font size="15.0" />
@@ -30,6 +24,8 @@
             <Font size="15.0" />
          </font>
       </TextArea>
-      <Button fx:id="registerButton" alignment="CENTER" layoutX="342.0" layoutY="344.0" mnemonicParsing="false" onAction="#registerUser" text="Register" />
+      <Button fx:id="registerButton" alignment="CENTER" layoutX="396.0" layoutY="343.0" mnemonicParsing="false" text="Register" />
+      <Button fx:id="returnButton" alignment="CENTER" layoutX="280.0" layoutY="343.0" mnemonicParsing="false" onAction="#toLoginPage" prefHeight="30.0" prefWidth="78.0" text="Return" />
+      <PasswordField fx:id="passwordField" layoutX="250.0" layoutY="282.0" prefHeight="30.0" prefWidth="254.0" promptText="Password" />
    </children>
 </AnchorPane>

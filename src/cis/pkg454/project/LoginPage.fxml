@@ -22,12 +22,8 @@
             <Font size="15.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="passwordField" layoutX="263.0" layoutY="279.0" prefHeight="30.0" prefWidth="254.0" promptText="Password">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextArea>
       <Button fx:id="loginButton" layoutX="361.0" layoutY="337.0" mnemonicParsing="false" onAction="#login" text="Log In!" />
       <Label fx:id="registerLink" alignment="CENTER" layoutX="264.0" layoutY="375.0" onMouseClicked="#toRegisterPage" prefHeight="17.0" prefWidth="254.0" text="Don't have an account? Register Here!" textFill="#e18d48" underline="true" />
+      <PasswordField layoutX="263.0" layoutY="279.0" prefHeight="30.0" prefWidth="254.0" promptText="Password" />
    </children>
 </AnchorPane>
