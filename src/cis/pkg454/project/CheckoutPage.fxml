@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #3e7fe8;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="cis.pkg454.project.CheckoutPageController">
+   <children>
+      <ImageView fx:id="backArrow" fitHeight="48.0" fitWidth="79.0" layoutX="13.0" layoutY="12.0" onMouseClicked="#toShoppingCartPage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@white-arrow-transparent-png-21.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="-7.0" layoutY="58.0" prefHeight="489.0" prefWidth="750.0">
+         <children>
+            <Label fx:id="titleText" text="Check Out" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="39.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <Label text="Review payment subtotal and select your method of payment." textFill="WHITE">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="subtotalText" text="Purchase subtotal: price" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Estimated Tax &amp; Shipping: $2.50" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="totalPriceText" text="Total: price" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="35.0" prefWidth="200.0">
+               <children>
+                  <Label text="Recipient Name: " textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameField" />
+               </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="35.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="shippingAddressField" text="Shipping Address: " textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField prefHeight="27.0" prefWidth="385.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="45.0" prefWidth="200.0">
+               <children>
+                  <RadioButton fx:id="checkRB" mnemonicParsing="false" text="Pay by Check" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="paymentMethod" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="cardRB" mnemonicParsing="false" text="Pay with Credit Card" textFill="WHITE" toggleGroup="$paymentMethod">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Button fx:id="continueButton" mnemonicParsing="false" onAction="#purchasePrompt" style="-fx-background-color: #c9deff;" text="Continue" />
+         </children>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #3e7fe8;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="cis.pkg454.project.ReportIssuePageController">
+   <children>
+      <ImageView fx:id="backArrow" fitHeight="48.0" fitWidth="79.0" layoutX="13.0" layoutY="12.0" onMouseClicked="#toMainPage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@white-arrow-transparent-png-21.png" />
+         </image>
+      </ImageView>
+      <VBox layoutY="69.0" prefHeight="493.0" prefWidth="750.0">
+         <children>
+            <Label fx:id="titleText" text="Report an Issue" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Label>
+            <RadioButton mnemonicParsing="false" text="Report a textbook post" textFill="WHITE">
+               <toggleGroup>
+                  <ToggleGroup fx:id="reportType" />
+               </toggleGroup>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Report a user" textFill="WHITE" toggleGroup="$reportType">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="2.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Report other issue" textFill="WHITE" toggleGroup="$reportType">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="2.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </RadioButton>
+            <Label fx:id="idText" text="Please provide details of the issue here:" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <TextArea fx:id="reportText" minWidth="0.0" prefHeight="202.0" prefWidth="0.0">
+               <VBox.margin>
+                  <Insets right="20.0" top="5.0" />
+               </VBox.margin>
+            </TextArea>
+            <Button fx:id="submitReportButton" mnemonicParsing="false" onAction="#sendReport" style="-fx-background-color: #c9deff;" text="Submit">
+               <VBox.margin>
+                  <Insets left="600.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
