@@ -38,7 +38,7 @@
                      </VBox.margin>
                   </TextArea>
                   <Button fx:id="registerButton" alignment="CENTER" mnemonicParsing="false" onAction="#registerUser" style="-fx-background-color: orange;" text="Register" />
-                  <Label fx:id="goToLoginPage" onMouseClicked="#toSignInPage" text="Already have an account? Sign in here." textAlignment="CENTER" textFill="#ee8206" underline="true" wrapText="true" />
+                  <Label fx:id="toLoginPageButton" onMouseClicked="#toLoginPage" text="Already have an account? Sign in here." textFill="#f29008" underline="true" />
                </children>
             </VBox>
          </children>
