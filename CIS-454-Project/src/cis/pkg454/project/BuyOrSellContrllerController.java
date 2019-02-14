@@ -7,7 +7,10 @@ package cis.pkg454.project;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
@@ -15,6 +18,9 @@ import javafx.fxml.Initializable;
  * @author Aiden
  */
 public class BuyOrSellContrllerController implements Initializable {
+
+    @FXML
+    private Button button1;
 
     /**
      * Initializes the controller class.
@@ -25,5 +31,9 @@ public class BuyOrSellContrllerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void clickButton(ActionEvent event) {
+    }
     
 }

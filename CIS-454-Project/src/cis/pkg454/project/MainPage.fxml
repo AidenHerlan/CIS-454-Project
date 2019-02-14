@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #3e7fe8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cis.pkg454.project.MainPageController">
+   <children>
+      <SplitPane dividerPositions="0.25" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #3e7fe8;">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="187.5">
+               <children>
+                  <VBox prefHeight="550.0" prefWidth="187.5">
+                     <children>
+                        <Label fx:id="greetingText" alignment="CENTER" prefHeight="60.0" prefWidth="196.0" style="-fx-background-color: #315489;" text="greeting" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <VBox prefHeight="490.0" prefWidth="191.0" style="-fx-background-color: #99bbef;">
+                           <children>
+                              <Button fx:id="accountInfoBtn" minHeight="50.0" mnemonicParsing="false" onAction="#toAccountInfoPage" prefHeight="60.0" prefWidth="187.5" style="-fx-background-color: #b6d2ff; -fx-border-color: white;" text="Account Info" />
+                              <Button fx:id="shoppingCartBtn" minHeight="50.0" mnemonicParsing="false" onAction="#toShoppingCartPage" prefHeight="60.0" prefWidth="187.5" style="-fx-background-color: #b6d2ff; -fx-border-color: white;" text="Shopping Cart" />
+                              <Button fx:id="sellBtn" minHeight="50.0" mnemonicParsing="false" onAction="#toSellPage" prefHeight="60.0" prefWidth="187.5" style="-fx-background-color: #b6d2ff; -fx-border-color: white;" text="Sell Textbooks" />
+                              <Button fx:id="reportBtn" minHeight="50.0" mnemonicParsing="false" onAction="#toReportPage" prefHeight="60.0" prefWidth="187.5" style="-fx-background-color: #b6d2ff; -fx-border-color: white;" text="Report an Issue" />
+                              <Button fx:id="reviewButton" minHeight="50.0" mnemonicParsing="false" onAction="#toReviewPage" prefHeight="60.0" prefWidth="187.5" style="-fx-background-color: #b6d2ff; -fx-border-color: white;" text="Review Reports" />
+                              <Button fx:id="adminManagementButton" minHeight="50.0" mnemonicParsing="false" onAction="#toAdminManagement" prefHeight="60.0" prefWidth="187.5" style="-fx-background-color: #b6d2ff; -fx-border-color: white;" text="Admin Management Tools" />
+                              <Button fx:id="logOutBtn" minHeight="50.0" mnemonicParsing="false" onAction="#logOutPrompt" prefHeight="60.0" prefWidth="187.5" style="-fx-background-color: #b6d2ff; -fx-border-color: white;" text="Log Out" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox prefHeight="549.0" prefWidth="558.0">
+                     <children>
+                        <TextField fx:id="searchBar" alignment="CENTER" promptText="Search" style="-fx-background-color: #d86927; -fx-text-fill: white; -fx-prompt-text-fill: white;">
+                           <VBox.margin>
+                              <Insets left="100.0" right="100.0" top="85.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Button fx:id="searchBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="558.0" style="-fx-background-color: #c9deff;" text="Go">
+                           <VBox.margin>
+                              <Insets left="260.0" right="260.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <TableView prefHeight="370.0" prefWidth="557.0">
+                          <columns>
+                            <TableColumn fx:id="titleCol" editable="false" prefWidth="202.0" text="Title" />
+                            <TableColumn fx:id="authorCol" editable="false" minWidth="0.0" prefWidth="175.0" text="Author" />
+                              <TableColumn fx:id="isbnCol" editable="false" minWidth="0.0" prefWidth="114.0" text="ISBN" />
+                              <TableColumn fx:id="priceCol" prefWidth="66.0" text="Price" />
+                          </columns>
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
