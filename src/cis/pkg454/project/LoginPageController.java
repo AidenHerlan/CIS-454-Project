@@ -34,8 +34,16 @@ public class LoginPageController implements Initializable {
     @FXML private Label registerLink;
 
     @FXML
-    void login(ActionEvent event) {
-
+    void login(ActionEvent event) throws Exception{
+        
+        // On verification, change scene to main page
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        Scene mainPageScene = new Scene(mainPageParent);
+        
+        window.setScene(mainPageScene);
+        window.show();
     }
 
     @FXML

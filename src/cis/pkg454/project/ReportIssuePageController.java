@@ -8,15 +8,16 @@ package cis.pkg454.project;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -26,43 +27,21 @@ import javafx.stage.Stage;
  *
  * @author OliviaFlynn
  */
-public class RegisterPageController implements Initializable {
+public class ReportIssuePageController implements Initializable {
 
-    @FXML
-    private TextArea usernameField;
-
-    @FXML
-    private Button registerButton;
-    
-    @FXML
-    private Button returnButton;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private TextArea emailField;
     @FXML
     private ImageView backArrow;
-
     @FXML
-    void registerUser(ActionEvent event) throws Exception {
-
-        // On registraction, change scene to main page
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        
-        Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-        Scene mainPageScene = new Scene(mainPageParent);
-        
-        window.setScene(mainPageScene);
-        window.show();
-    }
-    
+    private Label titleText;
     @FXML
-    void toLoginPage(ActionEvent event) {
-        
-    }
-    
+    private ToggleGroup reportType;
+    @FXML
+    private Label idText;
+    @FXML
+    private TextArea reportText;
+    @FXML
+    private Button submitReportButton;
+
     /**
      * Initializes the controller class.
      */
@@ -72,15 +51,19 @@ public class RegisterPageController implements Initializable {
     }    
 
     @FXML
-    private void toLoginPage(MouseEvent event) throws Exception {
-        // Load login info page fxml file and set to scene in order to navigate
+    private void toMainPage(MouseEvent event) throws Exception {
+        // Load main page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
         Scene accountInfoPageScene = new Scene(accountInfoPageParent);
         
         window.setScene(accountInfoPageScene);
         window.show();
+    }
+
+    @FXML
+    private void sendReport(ActionEvent event) {
     }
     
 }
