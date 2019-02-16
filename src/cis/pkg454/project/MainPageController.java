@@ -6,6 +6,7 @@
 package cis.pkg454.project;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
@@ -113,7 +116,26 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    private void logOutPrompt(ActionEvent event) {
+    private void logOutPrompt(ActionEvent event) throws Exception {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Log Out");
+        String s = "Log out?";
+        alert.setContentText(s);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
+            // logic for logout
+            
+            // Load report issue page fxml file and set to scene in order to navigate
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+            Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+
+            window.setScene(accountInfoPageScene);
+            window.show();
+        }
     }
 
     @FXML

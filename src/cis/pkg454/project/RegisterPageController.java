@@ -16,6 +16,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -34,6 +36,8 @@ public class RegisterPageController implements Initializable {
 
     @FXML
     private TextArea emailField;
+    @FXML
+    private ImageView backArrow;
 
     @FXML
     void registerUser(ActionEvent event) throws Exception {
@@ -55,5 +59,17 @@ public class RegisterPageController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void toLoginPage(MouseEvent event) throws Exception {
+        // Load login info page fxml file and set to scene in order to navigate
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        
+        window.setScene(accountInfoPageScene);
+        window.show();
+    }
     
 }

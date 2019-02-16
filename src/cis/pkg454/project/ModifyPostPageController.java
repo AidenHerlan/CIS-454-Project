@@ -55,7 +55,6 @@ public class ModifyPostPageController implements Initializable {
         
         Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("AdminManagementPage.fxml"));
         Scene accountInfoPageScene = new Scene(accountInfoPageParent);
-        System.out.println("peep");
         
         window.setScene(accountInfoPageScene);
         window.show();

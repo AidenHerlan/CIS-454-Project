@@ -55,7 +55,6 @@ public class ModifyItemPageController implements Initializable {
         
         Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("SellPage.fxml"));
         Scene accountInfoPageScene = new Scene(accountInfoPageParent);
-        System.out.println("peeeeemp");
         
         window.setScene(accountInfoPageScene);
         window.show();
