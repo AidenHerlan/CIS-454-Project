@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
@@ -29,7 +30,7 @@ public class LoginPageController implements Initializable {
     
     @FXML private TextArea usernameField;
     @FXML private Button loginButton;
-    @FXML private TextArea passwordField;
+    @FXML private PasswordField passwordField;
     @FXML private Label registerLink;
 
     @FXML

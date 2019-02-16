@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -32,7 +33,12 @@ public class RegisterPageController implements Initializable {
 
     @FXML
     private Button registerButton;
+    
+    @FXML
+    private Button returnButton;
 
+    @FXML
+    private PasswordField passwordField;
 
     @FXML
     private TextArea emailField;
@@ -50,6 +56,11 @@ public class RegisterPageController implements Initializable {
         
         window.setScene(mainPageScene);
         window.show();
+    }
+    
+    @FXML
+    void toLoginPage(ActionEvent event) {
+        
     }
     
     /**
