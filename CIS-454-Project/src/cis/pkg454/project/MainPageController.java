@@ -113,7 +113,7 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    private void logOutPrompt(ActionEvent event) {
+    private void logOutPrompt(ActionEvent event) throws Exception {
     }
 
     @FXML

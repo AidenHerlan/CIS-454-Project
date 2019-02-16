@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="CIS-454-Project.jar" size="38929" download="eager" />
+    <jar href="CIS-454-Project.jar" size="38941" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="CIS-454-Project" >
     <param name="requiredFXVersion" value="8.0+"/>
