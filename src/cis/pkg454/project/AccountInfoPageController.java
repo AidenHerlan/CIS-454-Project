@@ -68,13 +68,13 @@ public class AccountInfoPageController implements Initializable {
 
     @FXML
     private void toMainPage(MouseEvent event) throws Exception {
-        // Load account info page fxml file and set to scene in order to navigate
+        // Load main info page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent MainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        Scene MainPageScene = new Scene(MainPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(MainPageScene);
         window.show();
     }
 

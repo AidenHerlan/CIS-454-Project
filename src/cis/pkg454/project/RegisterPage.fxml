@@ -23,21 +23,21 @@
                         <Insets bottom="20.0" top="20.0" />
                      </VBox.margin>
                   </Text>
-                  <TextArea fx:id="usernameField" minHeight="20.0" prefHeight="30.0" promptText="Username">
+                  <TextField fx:id="usernameField" promptText="Username">
                      <VBox.margin>
                         <Insets left="100.0" right="100.0" />
                      </VBox.margin>
-                  </TextArea>
+                  </TextField>
                   <PasswordField promptText="Password">
                      <VBox.margin>
                         <Insets bottom="10.0" left="100.0" right="100.0" top="10.0" />
                      </VBox.margin>
                   </PasswordField>
-                  <TextArea fx:id="emailField" minHeight="20.0" prefHeight="30.0" promptText="Email">
+                  <TextField fx:id="emailField" promptText="Email">
                      <VBox.margin>
                         <Insets bottom="10.0" left="100.0" right="100.0" />
                      </VBox.margin>
-                  </TextArea>
+                  </TextField>
                   <Button fx:id="registerButton" alignment="CENTER" mnemonicParsing="false" onAction="#registerUser" style="-fx-background-color: orange;" text="Register" />
                </children>
             </VBox>
