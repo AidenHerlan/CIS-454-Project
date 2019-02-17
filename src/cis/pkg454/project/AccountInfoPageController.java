@@ -101,7 +101,7 @@ public class AccountInfoPageController implements Initializable {
         // Create and style Label objects
         Label usernameLabel = new Label("Username: ");
         Label nameLabel = new Label("Name: ");
-        Label passwordLabel = new Label("Password: ");
+        Label passwordLabel = new Label("New Password: ");
         Label phoneNumberLabel = new Label("Phone Number: ");
         Label emailLabel = new Label("Email: ");
         Label locationLabel = new Label("Address: ");
@@ -114,12 +114,12 @@ public class AccountInfoPageController implements Initializable {
         emailErr.setTextFill(Paint.valueOf("ORANGE"));
         
         // Create TextField objects
-        TextField usernameField = new TextField();
-        TextField nameField = new TextField();
+        TextField usernameField = new TextField(CIS454Project.currentUser.getUsername());
+        TextField nameField = new TextField(CIS454Project.currentUser.getName());
         PasswordField passwordField = new PasswordField();
-        TextField phoneNumberField = new TextField();
-        TextField emailField = new TextField();
-        TextField locationField = new TextField();
+        TextField phoneNumberField = new TextField(CIS454Project.currentUser.getPhoneNumber());
+        TextField emailField = new TextField(CIS454Project.currentUser.getEmail());
+        TextField locationField = new TextField(CIS454Project.currentUser.getAddress());
         
         // Set up validation hints for each field
         usernameField.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -172,21 +172,43 @@ public class AccountInfoPageController implements Initializable {
         ButtonType buttonTypeOk = new ButtonType("Done", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
 
-        // Fill in once User class is available, create User object to update database INCLUDE VALIDATION
-//        dialog.setResultConverter(new Callback<ButtonType, User>() {
-//            @Override
-//            public PhoneBook call(ButtonType b) {
-//
-//                if (b == buttonTypeOk) {
-//
-//                    return new PhoneBook(text1.getText(), text2.getText());
-//                }
-//
-//                return null;
-//            }
-//        });
-
+//      Fill in once User class is available, create User object to update database INCLUDE VALIDATION
         Optional<?> result = dialog.showAndWait();
+
+        // Validate fields when Done button is pressed
+        if (dialog.getResult() == buttonTypeOk) {
+            // If there are input errors, show 
+            if (!usernameErr.getText().equals("") || 
+                    !emailErr.getText().equals("") ||
+                    usernameField.getText().length() == 0) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Invalid Input");
+                alert.setContentText("Please input valid information, specified next to each invalid field. Make sure to provide an email, username, and password.");
+                alert.showAndWait();
+
+                editInfoPrompt(new ActionEvent());
+            }
+            // Otherwise, create a new user object with updated information. Use it to 
+            // update the app state
+            else {
+                User updatedUser = new User(
+                        CIS454Project.currentUser, 
+                        usernameField.getText(), 
+                        emailField.getText(), 
+                        passwordField.getText(),
+                        nameField.getText(),
+                        locationField.getText(),
+                        phoneNumberField.getText());
+                
+                // Pass updated user object to be added to database
+                CIS454Project.updateUser(updatedUser);
+                
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information Updated");
+                alert.setContentText("Your information has been successfully updated. Reload the page to see changes.");
+                alert.showAndWait();
+            }
+        }
     }
 
     /**

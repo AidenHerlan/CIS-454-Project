@@ -30,6 +30,16 @@ public class CIS454Project extends Application {
         stage.setResizable(false);
         stage.show();
     }
+    
+    /**
+     * Updates the correct user object in the database
+     * Sets the current user to the new user object with updated information
+     * @param newUser 
+     */
+    static public void updateUser(User newUser) {
+        currentUser = newUser;
+        // Update backend with new user object
+    }
 
     /**
      * @param args the command line arguments

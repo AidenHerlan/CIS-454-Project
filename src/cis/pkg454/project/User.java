@@ -41,20 +41,28 @@ public class User {
        this.isAdmin = isAdmin; 
    }
    
-    // Constructor for updating a current user
-   public User(User oldUser, String username, String email, String password, double balance, boolean isAdmin)
+   // Constructor for updating a current user. Uses the old user object to fill in fields not
+   // provided in edit dialog
+   public User(User oldUser, String username, String email, String password, String name, String address, String phoneNumber)
    {
        this.id = oldUser.getId();
-       this.name = "";
+       this.name = name;
        this.username = username;
        this.email = email;
-       this.password = password;
-       this.address = "";
-       this.phoneNumber = "";
-       this.balance = balance;
-       this.shoppingCart = new ArrayList<Textbook>();
-       this.sellingBooks = new ArrayList<Textbook>();
-       this.isAdmin = isAdmin; 
+       this.address = address;
+       this.phoneNumber = phoneNumber;
+       this.balance = oldUser.getBalance();
+       this.shoppingCart = oldUser.getShoppingCart();
+       this.sellingBooks = oldUser.getSellingBooks();
+       this.isAdmin = oldUser.getIsAdmin();
+       
+       // If no new password is provided, use the old user password, otherwise update it.
+       if (password.equals("")) {
+           this.password = oldUser.getPassword();
+       }
+       else {
+           this.password = password;
+       }
    }
     
    public int getId()
