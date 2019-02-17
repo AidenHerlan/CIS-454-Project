@@ -15,6 +15,15 @@ public class Report {
     private String description;
     private String comment;
     
+    public Report(int reporteeID, String type, String status, String description, String comment) {
+        this.reporteeId = reporteeID;
+        this.type = type;
+        this.status = status;
+        this.description = description;
+        this.comment = comment;
+//        this.id = highest id in backend + 1
+    }
+    
     public int getId()
 {
     return this.id;

@@ -97,6 +97,7 @@ public class CheckoutPageController implements Initializable {
             alert.setTitle("Invalid Input");
             alert.setContentText("Please provide information for Recipient Name and Shipping Address");
             alert.showAndWait();
+            return;
         }
         
         // if they are paying by check, collect account number and routing number

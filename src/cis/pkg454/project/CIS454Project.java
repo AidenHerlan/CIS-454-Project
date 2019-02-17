@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  * @author OliviaFlynn
  */
 public class CIS454Project extends Application {
-    public User currentUser = new User("", "", "", 1.0, false);
+    static public User currentUser = new User("joe98", "joe@joe.com", "", 1.0, false);
     
     @Override
     public void start(Stage stage) throws Exception {

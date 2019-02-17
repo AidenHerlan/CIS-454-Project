@@ -66,6 +66,12 @@ public class AccountInfoPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // get user object, fill labels
+        usernameText.setText("Username: " + CIS454Project.currentUser.getUsername());
+        nameText.setText("Name: " + CIS454Project.currentUser.getName());
+        emailText.setText("Email: " + CIS454Project.currentUser.getEmail());
+        addressText.setText("Address: " + CIS454Project.currentUser.getAddress());
+        phoneNumberText.setText("Phone Number: " + CIS454Project.currentUser.getPhoneNumber());
+        idText.setText("Account ID: " + CIS454Project.currentUser.getId());
     }    
 
     @FXML
@@ -167,7 +173,7 @@ public class AccountInfoPageController implements Initializable {
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
 
         // Fill in once User class is available, create User object to update database INCLUDE VALIDATION
-//        dialog.setResultConverter(new Callback<ButtonType, >() {
+//        dialog.setResultConverter(new Callback<ButtonType, User>() {
 //            @Override
 //            public PhoneBook call(ButtonType b) {
 //

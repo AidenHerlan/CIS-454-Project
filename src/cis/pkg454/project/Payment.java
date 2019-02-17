@@ -22,6 +22,7 @@ public class Payment {
     private Boolean method;  // 0 for credit card, 1 for check
     private double price;
     
+    // Constructor for card payments
     public Payment(int ID, int textbookID, int sellerID, int buyerID, int cardNum, int cardSecuCode, int cardExp, double price) {
         this.ID = ID;
         this.textbookID = textbookID;
@@ -34,6 +35,7 @@ public class Payment {
         this.method = false;
     }
     
+    // Constructor for check payments
     public Payment(int ID, int textbookID, int sellerID, int buyerID, int accNum, int routingNum, double price) {
         this.ID = ID;
         this.textbookID = textbookID;
