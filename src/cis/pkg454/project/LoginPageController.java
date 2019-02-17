@@ -48,6 +48,9 @@ public class LoginPageController implements Initializable {
         String name="";
         double balance=0.0;
         boolean isAdmin=false;
+        String email="";
+        String phoneNumber="";
+        String address="";
         
         // update the user object
         CIS454Project.currentUser.setName(name);
@@ -55,6 +58,9 @@ public class LoginPageController implements Initializable {
         CIS454Project.currentUser.setIsAdmin(isAdmin);
         CIS454Project.currentUser.setUsername(username);
         CIS454Project.currentUser.setPassword(password);
+        CIS454Project.currentUser.setEmail(email);
+        CIS454Project.currentUser.setPhoneNumber(phoneNumber);
+        CIS454Project.currentUser.setAddress(address);
         
         // On verification, change scene to main page
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

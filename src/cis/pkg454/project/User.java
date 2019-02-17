@@ -19,6 +19,8 @@ public class User {
     private Textbook [] shoppingCart;
     private Textbook [] sellingBooks;
     private boolean isAdmin;
+    private String email;
+    private String phoneNumber;
     
    public User(String name, String username, String password, double balance, boolean isAdmin)
    {
@@ -105,6 +107,22 @@ public class User {
     public void setIsAdmin(boolean value)
 {
      this.isAdmin = value;
+}
+    public void setEmail(String value)
+{
+     this.email = value;
+}
+    public String getEmail()
+{
+    return this.email;
+}
+    public void setPhoneNumber(String value)
+{
+     this.phoneNumber = value;
+}
+    public String getPhoneNumber()
+{
+    return this.phoneNumber;
 }
     
 }
