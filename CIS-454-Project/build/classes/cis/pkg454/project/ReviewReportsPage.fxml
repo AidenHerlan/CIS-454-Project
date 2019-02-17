@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #3e7fe8;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="cis.pkg454.project.ReviewReportsPageController">
+   <children>
+      <ImageView fx:id="backArrow" fitHeight="48.0" fitWidth="79.0" layoutX="23.0" layoutY="22.0" onMouseClicked="#toMainPage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@white-arrow-transparent-png-21.png" />
+         </image>
+      </ImageView>
+      <VBox layoutY="69.0" prefHeight="493.0" prefWidth="750.0">
+         <children>
+            <Label fx:id="titleText" text="Report Inbox" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="39.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="usernameText" text="Double click a report for details. Click checkboxes of issues to resolve. To resolve them, click the Resolve button. Changes may not be applied until the Resolve button is pressed. " textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Label>
+            <TableView prefHeight="314.0" prefWidth="750.0">
+              <columns>
+                <TableColumn fx:id="idCol" prefWidth="50.23657166957855" text="ID" />
+                <TableColumn fx:id="typeCol" prefWidth="133.75658416748047" text="Report Type" />
+                  <TableColumn fx:id="reportedIDCol" prefWidth="84.64651489257812" text="Reported ID" />
+                  <TableColumn fx:id="statusCol" prefWidth="70.25308227539062" text="Status" />
+                  <TableColumn fx:id="reportCol" prefWidth="349.7469177246094" text="Report" />
+                  <TableColumn fx:id="resolveCol" prefWidth="65.18576049804688" text="Resolve" />
+              </columns>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TableView>
+            <Button fx:id="resolveButton" mnemonicParsing="false" onAction="#resolveReports" style="-fx-background-color: #53e27e;" text="Resolve">
+               <VBox.margin>
+                  <Insets left="620.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
