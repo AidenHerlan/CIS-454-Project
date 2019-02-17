@@ -17,7 +17,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
@@ -27,14 +30,24 @@ import javafx.stage.Stage;
  */
 public class LoginPageController implements Initializable {
     
-    @FXML private TextArea usernameField;
+    @FXML private TextField usernameField;
     @FXML private Button loginButton;
-    @FXML private TextArea passwordField;
+    @FXML private PasswordField passwordField;
     @FXML private Label registerLink;
+    @FXML
+    private AnchorPane rootPane;
 
     @FXML
-    void login(ActionEvent event) {
-
+    void login(ActionEvent event) throws Exception{
+        
+        // On verification, change scene to main page
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        Scene mainPageScene = new Scene(mainPageParent);
+        
+        window.setScene(mainPageScene);
+        window.show();
     }
 
     @FXML

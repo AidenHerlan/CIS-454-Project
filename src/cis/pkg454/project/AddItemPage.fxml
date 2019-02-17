@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #3e7fe8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cis.pkg454.project.AddItemPageController">
+   <children>
+      <ImageView fx:id="backArrow" fitHeight="48.0" fitWidth="79.0" layoutX="23.0" layoutY="22.0" onMouseClicked="#toSellPage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@white-arrow-transparent-png-21.png" />
+         </image>
+      </ImageView>
+      <VBox layoutY="74.0" prefHeight="461.0" prefWidth="750.0">
+         <children>
+            <Label text="Add an Item" textFill="WHITE">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="740.0">
+               <children>
+                  <Label text="Textbook Name: " textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameField" prefHeight="27.0" prefWidth="302.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="740.0">
+               <children>
+                  <Label text="Author: " textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="authorField" prefHeight="27.0" prefWidth="388.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="740.0">
+               <children>
+                  <Label text="Price:  $" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="priceField" prefHeight="27.0" prefWidth="403.0" />
+                  <Label fx:id="priceErr" text="* Must be at least 1 character" textFill="ORANGE" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="740.0">
+               <children>
+                  <Label text="ISBN: " textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="isbnField" prefHeight="27.0" prefWidth="404.0" />
+                  <Label fx:id="isbnErr" text="* Must be at least 1 character" textFill="ORANGE" />
+               </children>
+            </HBox>
+            <Button fx:id="submitButton" mnemonicParsing="false" onAction="#addItem" style="-fx-background-color: #c9deff;" text="Submit">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

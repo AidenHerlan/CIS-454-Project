@@ -17,6 +17,7 @@ import javafx.stage.Stage;
  * @author OliviaFlynn
  */
 public class CIS454Project extends Application {
+    static public User currentUser = new User("joe98", "joe@joe.com", "", 1.0, false);
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -24,10 +25,20 @@ public class CIS454Project extends Application {
         
         Scene scene = new Scene(root);
         
-        stage.setTitle("Sell or Sell Textbooks Here!!!");
+        stage.setTitle("Sell or Buy Textbooks Here!!!");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+    }
+    
+    /**
+     * Updates the correct user object in the database
+     * Sets the current user to the new user object with updated information
+     * @param newUser 
+     */
+    static public void updateUser(User newUser) {
+        currentUser = newUser;
+        // Update backend with new user object
     }
 
     /**

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #3e7fe8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cis.pkg454.project.AccountInfoPageController">
+   <children>
+      <ImageView fx:id="backArrow" fitHeight="48.0" fitWidth="79.0" layoutX="3.0" layoutY="2.0" onMouseClicked="#toMainPage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@white-arrow-transparent-png-21.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="-3.0" layoutY="49.0" prefHeight="493.0" prefWidth="750.0">
+         <children>
+            <Label fx:id="titleText" text="Account Info for username" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Label>
+            <Label fx:id="usernameText" text="Username: username" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="nameText" text="Name: name" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="emailText" text="Email: email" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="addressText" text="Address: address" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="phoneNumberText" text="Phone Number: phone number" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="idText" text="Account ID: id" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#editInfoPrompt" style="-fx-background-color: #c9deff;" text="Edit Info">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="deleteAccountButton" mnemonicParsing="false" onAction="#deleteAccountPrompt" style="-fx-background-color: #db4f30;" text="Delete Account" />
+               </children>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
