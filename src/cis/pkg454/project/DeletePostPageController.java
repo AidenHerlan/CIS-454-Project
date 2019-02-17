@@ -57,10 +57,10 @@ public class DeletePostPageController implements Initializable {
         // Load admin management tools page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("AdminManagementPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent adminManagementPageParent = FXMLLoader.load(getClass().getResource("AdminManagementPage.fxml"));
+        Scene adminManagementPageScene = new Scene(adminManagementPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(adminManagementPageScene);
         window.show();
     }
     

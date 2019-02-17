@@ -46,34 +46,34 @@ public class AdminManagementPageController implements Initializable {
         // Load main page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent MainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        Scene MainPageScene = new Scene(MainPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(MainPageScene);
         window.show();
     }
 
     @FXML
     private void toModifyPage(ActionEvent event) throws Exception {
-        // Load main page fxml file and set to scene in order to navigate
+        // Load modify page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("ModifyPostPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent ModifyPostPageParent = FXMLLoader.load(getClass().getResource("ModifyPostPage.fxml"));
+        Scene ModifyPostPageScene = new Scene(ModifyPostPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(ModifyPostPageScene);
         window.show();
     }
 
     @FXML
     private void toDeletePage(ActionEvent event) throws Exception {
-        // Load main page fxml file and set to scene in order to navigate
+        // Load delete page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("DeletePostPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent DeletePostPageParent = FXMLLoader.load(getClass().getResource("DeletePostPage.fxml"));
+        Scene DeletePostPageScene = new Scene(DeletePostPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(DeletePostPageScene);
         window.show();
     }
     

@@ -15,7 +15,17 @@ public class Textbook {
     private String author;
     private int isbn;
     private int id;
-    private String seller;
+    private int sellerID;
+    
+    public void Textbook(String name, double price, String author, int isbn) {
+        this.name = name;
+        this.price = price;
+        this.author = author;
+        this.isbn = isbn;
+        // Fill in once database is available
+//        this.id = last id in database + 1
+//        this.sellerID = currentUser.ID
+    }
     
     public String getName()
 {
@@ -57,13 +67,9 @@ public class Textbook {
 {
      this.isbn = value;
 }
-    public String getSeller()
+    public int getSellerID()
 {
-    return this.seller;
-}
-    public void setSeller(String value)
-{
-     this.seller = value;
+    return this.sellerID;
 }
 
     

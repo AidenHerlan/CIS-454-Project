@@ -56,10 +56,10 @@ public class ShoppingCartPageController implements Initializable {
         // Load main page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        Scene mainPageScene = new Scene(mainPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(mainPageScene);
         window.show();
     }
 
@@ -68,10 +68,10 @@ public class ShoppingCartPageController implements Initializable {
         // Load checkout page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("CheckoutPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent checkoutPagePageParent = FXMLLoader.load(getClass().getResource("CheckoutPage.fxml"));
+        Scene checkoutPagePageScene = new Scene(checkoutPagePageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(checkoutPagePageScene);
         window.show();
     }
     

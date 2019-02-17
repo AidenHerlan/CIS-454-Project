@@ -5,6 +5,8 @@
  */
 package cis.pkg454.project;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Aiden
@@ -13,25 +15,54 @@ public class User {
     private int id;
     private String name;
     private String username;
+    private String email;
     private String password;
     private String address;
+    private String phoneNumber;
     private double balance;
-    private Textbook [] shoppingCart;
-    private Textbook [] sellingBooks;
+    private ArrayList<Textbook> shoppingCart;
+    private ArrayList<Textbook> sellingBooks;
     private boolean isAdmin;
     
-   public User(int id, String name, String username, String password, String address, double balance, Textbook [] shoppingCart, Textbook [] sellingBooks, boolean isAdmin)
+    // Constructor for creating a new user
+   public User(String username, String email, String password, double balance, boolean isAdmin)
    {
-       this.id = id;
+       //Set ID to last ID in database + 1
+//       this.id = id;
+       this.name = "";
+       this.username = username;
+       this.email = email;
+       this.password = password;
+       this.address = "";
+       this.phoneNumber = "";
+       this.balance = balance;
+       this.shoppingCart = new ArrayList<Textbook>();
+       this.sellingBooks = new ArrayList<Textbook>();
+       this.isAdmin = isAdmin; 
+   }
+   
+   // Constructor for updating a current user. Uses the old user object to fill in fields not
+   // provided in edit dialog
+   public User(User oldUser, String username, String email, String password, String name, String address, String phoneNumber)
+   {
+       this.id = oldUser.getId();
        this.name = name;
        this.username = username;
-       this.password = password;
+       this.email = email;
        this.address = address;
-       this.balance = balance;
-       this.shoppingCart = shoppingCart;
-       this.sellingBooks = sellingBooks;
-       this.isAdmin = isAdmin;
+       this.phoneNumber = phoneNumber;
+       this.balance = oldUser.getBalance();
+       this.shoppingCart = oldUser.getShoppingCart();
+       this.sellingBooks = oldUser.getSellingBooks();
+       this.isAdmin = oldUser.getIsAdmin();
        
+       // If no new password is provided, use the old user password, otherwise update it.
+       if (password.equals("")) {
+           this.password = oldUser.getPassword();
+       }
+       else {
+           this.password = password;
+       }
    }
     
    public int getId()
@@ -58,6 +89,14 @@ public class User {
 {
      this.username = value;
 }
+    public String getEmail()
+{
+    return this.email;
+}
+    public void setEmail(String value)
+{
+     this.email = value;
+}
     public String getPassword()
 {
     return this.password;
@@ -72,7 +111,15 @@ public class User {
 }
     public void setAddress(String value)
 {
-     this.address = value;
+     this.phoneNumber = value;
+}
+    public String getPhoneNumber()
+{
+    return this.address;
+}
+    public void setPhoneNumber(String value)
+{
+     this.phoneNumber = value;
 }
      public double getBalance()
 {
@@ -82,19 +129,19 @@ public class User {
 {
      this.balance = value;
 }
-    public Textbook [] getShoppingCart()
+    public ArrayList<Textbook> getShoppingCart()
 {
     return this.shoppingCart;
 }
-    public void setShoppingCart(Textbook [] value)
+    public void setShoppingCart(ArrayList<Textbook> value)
 {
      this.shoppingCart = value;
 }
-    public Textbook [] getSellingBooks()
+    public ArrayList<Textbook> getSellingBooks()
 {
     return this.sellingBooks;
 }
-    public void setSellingBooks(Textbook [] value)
+    public void setSellingBooks(ArrayList<Textbook> value)
 {
      this.sellingBooks = value;
 }

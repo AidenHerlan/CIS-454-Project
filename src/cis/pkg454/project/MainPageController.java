@@ -84,10 +84,10 @@ public class MainPageController implements Initializable {
         // Load account info page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("ShoppingCartPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent shoppingCartPageParent = FXMLLoader.load(getClass().getResource("ShoppingCartPage.fxml"));
+        Scene shoppingCartPageScene = new Scene(shoppingCartPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(shoppingCartPageScene);
         window.show();
     }
 
@@ -96,10 +96,10 @@ public class MainPageController implements Initializable {
         // Load sell page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("SellPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent sellPageParent = FXMLLoader.load(getClass().getResource("SellPage.fxml"));
+        Scene sellPageScene = new Scene(sellPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(sellPageScene);
         window.show();
     }
 
@@ -108,10 +108,10 @@ public class MainPageController implements Initializable {
         // Load report issue page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("ReportIssuePage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent reportIssuePageParent = FXMLLoader.load(getClass().getResource("ReportIssuePage.fxml"));
+        Scene reportIssuePageScene = new Scene(reportIssuePageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(reportIssuePageScene);
         window.show();
     }
 
@@ -130,10 +130,10 @@ public class MainPageController implements Initializable {
             // Load report issue page fxml file and set to scene in order to navigate
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
-            Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+            Parent loginPageParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+            Scene loginPageScene = new Scene(loginPageParent);
 
-            window.setScene(accountInfoPageScene);
+            window.setScene(loginPageScene);
             window.show();
         }
     }
@@ -143,10 +143,10 @@ public class MainPageController implements Initializable {
         // Load report issue page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("ReviewReportsPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent reviewReportsPageParent = FXMLLoader.load(getClass().getResource("ReviewReportsPage.fxml"));
+        Scene reviewReportsPageScene = new Scene(reviewReportsPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(reviewReportsPageScene);
         window.show();
     }
 
@@ -155,10 +155,10 @@ public class MainPageController implements Initializable {
         // Load admin management tools page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("AdminManagementPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent adminManagementPageParent = FXMLLoader.load(getClass().getResource("AdminManagementPage.fxml"));
+        Scene adminManagementPageScene = new Scene(adminManagementPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(adminManagementPageScene);
         window.show();
     }
     
