@@ -98,6 +98,7 @@ public class CheckoutPageController implements Initializable {
             alert.setTitle("Invalid Input");
             alert.setContentText("Please provide information for Recipient Name and Shipping Address");
             alert.showAndWait();
+            return;
         }
         
         // if they are paying by check, collect account number and routing number
@@ -182,7 +183,17 @@ public class CheckoutPageController implements Initializable {
                     purchasePrompt(new ActionEvent());
                 }
                 else {
-                    // Create payment obj and send to backend 
+                    // Create payment obj and send to backend
+                     ArrayList<Payment> listOfPayments = new ArrayList<Payment>();
+
+                    for(int i = 1; i<=CIS454Project.currentUser.getShoppingCart().size(); i++)
+
+                    {
+
+                   Payment userPayment = new Payment(1, 1, 2, 1, accountNumberField.getText(), routingNumberField.getText(), Double.valueOf(totalPriceText.getText()));
+
+                   listOfPayments.add(userPayment);
+                }
                 }
             }
         }
@@ -291,11 +302,14 @@ public class CheckoutPageController implements Initializable {
                 else {
                     // Create payment obj and send to backend
                     ArrayList<Payment> listOfPayments = new ArrayList<Payment>();
-                    for(int i = 1; i<=CIS454Project.currentUser.getShoppingCart.length(); i++)
+
+                    for(int i = 1; i<=CIS454Project.currentUser.getShoppingCart().size(); i++)
+
                     {
+
                    Payment userPayment = new Payment(1, 1, 2, 1, cardNumberField.getText(), cvvNumberField.getText(), expirationField.getText(), Double.valueOf(totalPriceText.getText()));
+
                    listOfPayments.add(userPayment);
-                    }
                 }
             }
         }
@@ -303,3 +317,5 @@ public class CheckoutPageController implements Initializable {
     }
     
 }
+}
+
