@@ -90,7 +90,7 @@ public class ReportIssuePageController implements Initializable {
     }
 
     @FXML
-    private void sendReport(ActionEvent event) {
+    private void sendReport(ActionEvent event) throws Exception {
         // If input is invalid, show an error message
         if ((!idErr.getText().equals("") && !otherReportRB.isSelected()) || reportText.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -100,7 +100,34 @@ public class ReportIssuePageController implements Initializable {
             return;
         }
         
-        // Otherwise, send the report to the back end
+        // Otherwise, determine the report type and send the report to the back end
+        String type;
+        if (reportType.getSelectedToggle() == userReportRB) {
+            type = "USER";
+        }
+        else if (reportType.getSelectedToggle() == postReportRB) {
+            type = "POST";
+        }
+        else {
+            type = "OTHER";
+        }
+        
+        Report newReport = new Report(Integer.valueOf(idField.getText()), type, reportText.getText());
+        CIS454Project.addReport(newReport);
+        
+        // Show success message and navigate back to main page
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Success");
+        alert.setContentText("Your report has been sent successfully.");
+        alert.showAndWait();
+        
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        Scene mainPageScene = new Scene(mainPageParent);
+        
+        window.setScene(mainPageScene);
+        window.show();
     }
     
 }

@@ -70,6 +70,25 @@ public class CIS454Project extends Application {
         
         // Delete user from database, and all textbooks sold by this user
     }
+    
+    /**
+     * Adds the specified item to the user's selling list and adds to the database of books being sold
+     * @param item 
+     */
+    static public void addItem(Textbook item) {
+        // Add the item to the user's selling list
+        currentUser.getSellingBooks().add(item);
+        
+        // Add the item to the database of items being sold
+    }
+    
+    /**
+     * Adds the specified report to the database
+     * @param report 
+     */
+    static public void addReport(Report report) {
+        // Addd the item to the database of reports
+    }
 
     /**
      * @param args the command line arguments

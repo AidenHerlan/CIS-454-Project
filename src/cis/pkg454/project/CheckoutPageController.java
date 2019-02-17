@@ -7,6 +7,7 @@ package cis.pkg454.project;
 
 import java.awt.Color;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -289,11 +290,17 @@ public class CheckoutPageController implements Initializable {
                     purchasePrompt(new ActionEvent());
                 }
                 else {
-                    // Create payment obj and send to backend 
+                    // Create payment obj for each book in shopping cart and send to backend 
+//                    ArrayList<Payment> listOfPayments = new ArrayList<Payment>();
+//                    
+//                    for(int i = 1; i <= CIS454Project.currentUser.getShoppingCart().size(); i++) {
+//                        Payment userPayment = new Payment(1, 1, 2, 1, cardNumberField.getText(), cvvNumberField.getText(), expirationField.getText(), Double.valueOf(totalPriceText.getText()));
+//                        listOfPayments.add(userPayment);
+//                    }
                 }
             }
+
         }
-        
+
     }
-    
 }

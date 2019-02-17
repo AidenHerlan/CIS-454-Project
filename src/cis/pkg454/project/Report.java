@@ -10,18 +10,29 @@ package cis.pkg454.project;
 public class Report {
     private int id;
     private int reporteeId;
-    private String type;
-    private String status;
+    private String type; // "USER", "POST", or "OTHER"
+    private String status; // "RESOLVED" or "UNRESOLVED"
     private String description;
     private String comment;
     
-    public Report(int reporteeID, String type, String status, String description, String comment) {
+    // Constructor for making a new report
+    public Report(int reporteeID, String type, String description) {
         this.reporteeId = reporteeID;
         this.type = type;
-        this.status = status;
+        this.status = "UNRESOLVED";
         this.description = description;
-        this.comment = comment;
+        this.comment = "";
 //        this.id = highest id in backend + 1
+    }
+    
+    // Constructor for updating a report
+    public Report(Report oldReport, String comment) {
+        this.reporteeId = oldReport.getRepoteeId();
+        this.type = oldReport.getType();
+        this.status = oldReport.getStatus();
+        this.description = oldReport.getDescription();
+        this.comment = comment;
+        this.id = oldReport.getId();
     }
     
     public int getId()
