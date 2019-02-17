@@ -116,7 +116,7 @@ public class ReportIssuePageController implements Initializable {
         CIS454Project.addReport(newReport);
         
         // Show success message and navigate back to main page
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setContentText("Your report has been sent successfully.");
         alert.showAndWait();

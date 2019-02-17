@@ -34,22 +34,6 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="subtotalText" text="Purchase subtotal: price" textFill="WHITE">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="15.0" />
-               </VBox.margin>
-            </Label>
-            <Label text="Estimated Tax &amp; Shipping: $2.50" textFill="WHITE">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Label>
             <Label fx:id="totalPriceText" text="Total: price" textFill="WHITE">
                <font>
                   <Font size="20.0" />

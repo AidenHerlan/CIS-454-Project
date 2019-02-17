@@ -5,6 +5,7 @@
  */
 package cis.pkg454.project;
 
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -87,9 +88,21 @@ public class CIS454Project extends Application {
      * @param report 
      */
     static public void addReport(Report report) {
-        // Addd the item to the database of reports
+        // Add the item to the database of reports
     }
 
+    /**
+     * Put payment records in the payment database
+     * Remove textbooks corresponding to those that were just bought from textbook database
+     * Remove textbooks from selling list of sellers
+     * Subtract the price from the user's balance
+     * Clear the user's shopping cart
+     * @param payments 
+     */
+    static public void submitPayments(ArrayList<Payment> payments, double price) {
+        
+    }
+    
     /**
      * @param args the command line arguments
      */

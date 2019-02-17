@@ -50,8 +50,6 @@ public class CheckoutPageController implements Initializable {
     @FXML
     private Label titleText;
     @FXML
-    private Label subtotalText;
-    @FXML
     private Label totalPriceText;
     @FXML
     private TextField nameField;
@@ -65,6 +63,8 @@ public class CheckoutPageController implements Initializable {
     private RadioButton checkRB;
     @FXML
     private RadioButton cardRB;
+    
+    int totalCost = 0;
 
     /**
      * Initializes the controller class.
@@ -73,6 +73,14 @@ public class CheckoutPageController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // Set the pay by check radio button to be seleted by default
         checkRB.setSelected(true);
+        
+        // Calculate the total cost
+        for (int i = 0; i < CIS454Project.currentUser.getShoppingCart().size(); i++) {
+            totalCost += CIS454Project.currentUser.getShoppingCart().get(i).getPrice();
+        }
+        
+        // Provide total cost to the appropriate label
+        totalPriceText.setText("Total Price: $" + totalCost);
     }    
 
     @FXML
@@ -93,10 +101,19 @@ public class CheckoutPageController implements Initializable {
      */
     @FXML
     private void purchasePrompt(ActionEvent event) {
+        // Show an error message if name or shipping address fields are empty
         if (nameField.getCharacters().length() == 0 || shippingAddressField.getCharacters().length() == 0) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Invalid Input");
             alert.setContentText("Please provide information for Recipient Name and Shipping Address");
+            alert.showAndWait();
+            return;
+        }
+        // Show an error message if they do not have enough money to buy all the books
+        if (CIS454Project.currentUser.getBalance() < totalCost) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Insufficient Funds");
+            alert.setContentText("There is not enough money in your account to make this purchase. Please remove some items from your shopping cart and try again, or get your money up");
             alert.showAndWait();
             return;
         }
@@ -183,7 +200,26 @@ public class CheckoutPageController implements Initializable {
                     purchasePrompt(new ActionEvent());
                 }
                 else {
-                    // Create payment obj and send to backend 
+                    // Create payment obj for each book in shopping cart and send to backend 
+                    ArrayList<Payment> listOfPayments = new ArrayList<Payment>();
+                    
+                    ArrayList<Textbook> shoppingCart = CIS454Project.currentUser.getShoppingCart();
+                    for(int i = 1; i <= shoppingCart.size(); i++) {
+                        // Create Payment object
+                        Payment userPayment = new Payment(
+                                shoppingCart.get(i).getId(), 
+                                shoppingCart.get(i).getSellerID(), 
+                                CIS454Project.currentUser.getId(),
+                                accountNumberField.getText(),
+                                routingNumberField.getText(),
+                                shoppingCart.get(i).getPrice());
+                        
+                        // Add to list of payments
+                        listOfPayments.add(userPayment);
+                    }
+                    
+                    // Send the list of payments to update the back end
+                    CIS454Project.submitPayments(listOfPayments, totalCost);
                 }
             }
         }
@@ -291,12 +327,26 @@ public class CheckoutPageController implements Initializable {
                 }
                 else {
                     // Create payment obj for each book in shopping cart and send to backend 
-//                    ArrayList<Payment> listOfPayments = new ArrayList<Payment>();
-//                    
-//                    for(int i = 1; i <= CIS454Project.currentUser.getShoppingCart().size(); i++) {
-//                        Payment userPayment = new Payment(1, 1, 2, 1, cardNumberField.getText(), cvvNumberField.getText(), expirationField.getText(), Double.valueOf(totalPriceText.getText()));
-//                        listOfPayments.add(userPayment);
-//                    }
+                    ArrayList<Payment> listOfPayments = new ArrayList<Payment>();
+                    
+                    ArrayList<Textbook> shoppingCart = CIS454Project.currentUser.getShoppingCart();
+                    for(int i = 1; i <= shoppingCart.size(); i++) {
+                        // Create Payment object
+                        Payment userPayment = new Payment(
+                                shoppingCart.get(i).getId(), 
+                                shoppingCart.get(i).getSellerID(), 
+                                CIS454Project.currentUser.getId(),
+                                cardNumberField.getText(),
+                                cvvNumberField.getText(),
+                                expirationField.getText(),
+                                shoppingCart.get(i).getPrice());
+                        
+                        // Add to list of payments
+                        listOfPayments.add(userPayment);
+                    }
+                    
+                    // Send the list of payments to update the back end
+                    CIS454Project.submitPayments(listOfPayments, totalCost);
                 }
             }
 
