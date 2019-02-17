@@ -17,6 +17,7 @@ import javafx.stage.Stage;
  * @author OliviaFlynn
  */
 public class CIS454Project extends Application {
+    static public User currentUser = new User("", "", "", 1.0, false);
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -24,7 +25,7 @@ public class CIS454Project extends Application {
         
         Scene scene = new Scene(root);
         
-        stage.setTitle("Buy or Sell Textbooks Here!!!");
+        stage.setTitle("Sell or Buy Textbooks Here!!!");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

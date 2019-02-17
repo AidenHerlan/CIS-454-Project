@@ -14,7 +14,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -30,22 +33,48 @@ public class AddItemPageController implements Initializable {
     @FXML
     private ImageView backArrow;
     @FXML
-    private HBox nameBox;
-    @FXML
-    private HBox authorBox;
-    @FXML
-    private HBox priceBox;
-    @FXML
-    private HBox isbnBox;
-    @FXML
     private Button submitButton;
+    @FXML
+    private TextField nameField;
+    @FXML
+    private Label priceErr;
+    @FXML
+    private Label isbnErr;
+    @FXML
+    private TextField authorField;
+    @FXML
+    private TextField priceField;
+    @FXML
+    private TextField isbnField;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // Set up validation hints for each field
+        priceField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            // If the input is not in the right form, add label notifying user
+            if (!priceField.getCharacters().toString().matches("[0-9].[0-9][0-9]")) { 
+                priceErr.setText("* Provide a price of the form d.cc ex. 1.50");
+                priceErr.setWrapText(true);
+            }
+            // Else, remove any existing label from the grid
+            else {
+                priceErr.setText("");
+            }
+        });
+        isbnField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            // If the input is not in the right form, add label notifying user
+            if (isbnField.getCharacters().length() != 13) { 
+                isbnErr.setText("* Must be 13 numbers");
+                isbnErr.setWrapText(true);
+            }
+            // Else, remove any existing label from the grid
+            else {
+                isbnErr.setText("");
+            }
+        });
     }    
 
     @FXML
@@ -53,15 +82,28 @@ public class AddItemPageController implements Initializable {
         // Load sell page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("SellPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent SellPageParent = FXMLLoader.load(getClass().getResource("SellPage.fxml"));
+        Scene SellPageScene = new Scene(SellPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(SellPageScene);
         window.show();
     }
 
     @FXML
     private void addItem(ActionEvent event) {
+        // Make sure that all fields have valid input, if not, show an error message
+        if (isbnErr.getText().length() != 0 || 
+                priceErr.getText().length() != 0 ||
+                nameField.getCharacters().length() == 0 ||
+                authorField.getCharacters().length() == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Input");
+            alert.setContentText("Please input valid information in all fields");
+            alert.showAndWait();
+            return;
+        }
+        
+        // Create Textbook item and send to backend
     }
     
 }

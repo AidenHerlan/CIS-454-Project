@@ -18,7 +18,7 @@
       </ImageView>
       <VBox layoutX="3.0" layoutY="84.0" prefHeight="455.0" prefWidth="750.0">
          <children>
-            <Label fx:id="titleText" text="Shopping Cart" textFill="WHITE" wrapText="true">
+            <Label text="Shopping Cart" textFill="WHITE" wrapText="true">
                <font>
                   <Font size="39.0" />
                </font>
@@ -26,7 +26,7 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="titleText1" text="Edit your shopping cart, and press Check Out to buy." textFill="WHITE" wrapText="true">
+            <Label text="Edit your shopping cart, and press Check Out to buy." textFill="WHITE" wrapText="true">
                <font>
                   <Font size="15.0" />
                </font>
@@ -36,12 +36,11 @@
             </Label>
             <TableView prefHeight="318.0" prefWidth="730.0">
               <columns>
-                <TableColumn editable="false" prefWidth="238.24888706207275" text="Title" />
-                <TableColumn editable="false" prefWidth="168.02117919921875" text="Author" />
-                  <TableColumn editable="false" prefWidth="113.54013061523438" text="ISBN" />
-                  <TableColumn editable="false" prefWidth="81.0592041015625" text="Price" />
-                  <TableColumn editable="false" minWidth="0.0" prefWidth="62.90283203125" text="Edit" />
-                  <TableColumn editable="false" prefWidth="76.09716796875" text="Delete" />
+                <TableColumn fx:id="titleCol" editable="false" prefWidth="290.2675943374634" text="Title" />
+                <TableColumn fx:id="authorCol" editable="false" prefWidth="182.732421875" text="Author" />
+                  <TableColumn fx:id="isbnCol" editable="false" prefWidth="116.06097412109375" text="ISBN" />
+                  <TableColumn fx:id="priceCol" editable="false" prefWidth="71.9217529296875" text="Price" />
+                  <TableColumn fx:id="deleteCol" editable="false" prefWidth="69.17523193359375" text="Delete" />
               </columns>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

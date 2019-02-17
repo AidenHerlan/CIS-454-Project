@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -30,11 +31,17 @@ public class ShoppingCartPageController implements Initializable {
     @FXML
     private ImageView backArrow;
     @FXML
-    private Label titleText;
-    @FXML
-    private Label titleText1;
-    @FXML
     private Button checkOutButton;
+    @FXML
+    private TableColumn<?, ?> titleCol;
+    @FXML
+    private TableColumn<?, ?> authorCol;
+    @FXML
+    private TableColumn<?, ?> isbnCol;
+    @FXML
+    private TableColumn<?, ?> priceCol;
+    @FXML
+    private TableColumn<?, ?> deleteCol;
 
     /**
      * Initializes the controller class.
@@ -49,10 +56,10 @@ public class ShoppingCartPageController implements Initializable {
         // Load main page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        Scene mainPageScene = new Scene(mainPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(mainPageScene);
         window.show();
     }
 
@@ -61,10 +68,10 @@ public class ShoppingCartPageController implements Initializable {
         // Load checkout page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("CheckoutPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent checkoutPagePageParent = FXMLLoader.load(getClass().getResource("CheckoutPage.fxml"));
+        Scene checkoutPagePageScene = new Scene(checkoutPagePageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(checkoutPagePageScene);
         window.show();
     }
     

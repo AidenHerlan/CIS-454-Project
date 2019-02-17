@@ -27,6 +27,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -68,13 +70,13 @@ public class AccountInfoPageController implements Initializable {
 
     @FXML
     private void toMainPage(MouseEvent event) throws Exception {
-        // Load account info page fxml file and set to scene in order to navigate
+        // Load main info page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent MainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        Scene MainPageScene = new Scene(MainPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(MainPageScene);
         window.show();
     }
 
@@ -90,13 +92,20 @@ public class AccountInfoPageController implements Initializable {
         dialog.setHeaderText("Edit information and press Done or exit out to discard changes");
         dialog.setResizable(false);
         
-        // Create Label objects
+        // Create and style Label objects
         Label usernameLabel = new Label("Username: ");
         Label nameLabel = new Label("Name: ");
         Label passwordLabel = new Label("Password: ");
         Label phoneNumberLabel = new Label("Phone Number: ");
         Label emailLabel = new Label("Email: ");
         Label locationLabel = new Label("Address: ");
+        Label usernameErr = new Label("");
+        Label emailErr = new Label("");
+        
+        usernameErr.setFont(Font.font("System", 10));
+        usernameErr.setTextFill(Paint.valueOf("ORANGE"));
+        emailErr.setFont(Font.font("System", 10));
+        emailErr.setTextFill(Paint.valueOf("ORANGE"));
         
         // Create TextField objects
         TextField usernameField = new TextField();
@@ -105,6 +114,30 @@ public class AccountInfoPageController implements Initializable {
         TextField phoneNumberField = new TextField();
         TextField emailField = new TextField();
         TextField locationField = new TextField();
+        
+        // Set up validation hints for each field
+        usernameField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            // If the input is invalid, create and add label notifying user
+            if (usernameField.getCharacters().length() > 0) {  //replace later with username validation
+                usernameErr.setText("* This username is already taken");
+                usernameErr.setWrapText(true);
+            }
+            // Else, remove any existing label from the grid
+            else {
+                usernameErr.setText("");
+            }
+        });
+        emailField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            // If the input is invalid, create and add label notifying user
+            if (!emailField.getCharacters().toString().matches("^[a-zA-Z0-9_.]+@[a-zA-Z0-9_.]+.[a-zA-Z0-9_.]+")) {
+                emailErr.setText("* Please provide a valid email");
+                emailErr.setWrapText(true);
+            }
+            // Else, remove any existing label from the grid
+            else {
+                emailErr.setText("");
+            }
+        });
 
         // Create gridpane and add elements
         GridPane grid = new GridPane();
@@ -124,13 +157,16 @@ public class AccountInfoPageController implements Initializable {
         grid.add(emailField, 2, 5);
         grid.add(locationField, 2, 6);
         
+        grid.add(usernameErr, 3, 1);
+        grid.add(emailErr, 3, 5);
+        
         // Add grid to dialog pane
         dialog.getDialogPane().setContent(grid);
 
         ButtonType buttonTypeOk = new ButtonType("Done", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
 
-        // Fill in once User class is available
+        // Fill in once User class is available, create User object to update database INCLUDE VALIDATION
 //        dialog.setResultConverter(new Callback<ButtonType, >() {
 //            @Override
 //            public PhoneBook call(ButtonType b) {
@@ -154,7 +190,7 @@ public class AccountInfoPageController implements Initializable {
      * @param event 
      */
     @FXML
-    private void deleteAccountPrompt(ActionEvent event) {
+    private void deleteAccountPrompt(ActionEvent event) throws Exception {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Delete Account");
         String s = "You are about to delete your account. Are you sure you want to do that?";
@@ -164,6 +200,15 @@ public class AccountInfoPageController implements Initializable {
 
         if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
             // call to server to delete
+            
+            // Navigate back to login page
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Parent loginPageParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+            Scene loginPageScene = new Scene(loginPageParent);
+
+            window.setScene(loginPageScene);
+            window.show();
         }
     }
     

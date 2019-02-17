@@ -48,10 +48,10 @@ public class SellPageController implements Initializable {
         // Load main page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        Scene mainPageScene = new Scene(mainPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(mainPageScene);
         window.show();
     }
 
@@ -60,10 +60,10 @@ public class SellPageController implements Initializable {
         // Load sell page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("AddItemPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent addItemPageParent = FXMLLoader.load(getClass().getResource("AddItemPage.fxml"));
+        Scene addItemPageScene = new Scene(addItemPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(addItemPageScene);
         window.show();
     }
 
@@ -72,10 +72,10 @@ public class SellPageController implements Initializable {
         // Load sell page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("ModifyItemPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent modifyItemPageParent = FXMLLoader.load(getClass().getResource("ModifyItemPage.fxml"));
+        Scene modifyItemPageScene = new Scene(modifyItemPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(modifyItemPageScene);
         window.show();
     }
 
@@ -84,10 +84,10 @@ public class SellPageController implements Initializable {
         // Load sell page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("DeleteItemPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
+        Parent deleteItemPageParent = FXMLLoader.load(getClass().getResource("DeleteItemPage.fxml"));
+        Scene deleteItemPageScene = new Scene(deleteItemPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(deleteItemPageScene);
         window.show();
     }
     

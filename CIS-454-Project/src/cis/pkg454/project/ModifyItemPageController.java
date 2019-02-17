@@ -53,11 +53,10 @@ public class ModifyItemPageController implements Initializable {
         // Load sell page fxml file and set to scene in order to navigate
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent accountInfoPageParent = FXMLLoader.load(getClass().getResource("SellPage.fxml"));
-        Scene accountInfoPageScene = new Scene(accountInfoPageParent);
-        System.out.println("peeeeemp");
+        Parent sellPageParent = FXMLLoader.load(getClass().getResource("SellPage.fxml"));
+        Scene sellPageScene = new Scene(sellPageParent);
         
-        window.setScene(accountInfoPageScene);
+        window.setScene(sellPageScene);
         window.show();
     }
 

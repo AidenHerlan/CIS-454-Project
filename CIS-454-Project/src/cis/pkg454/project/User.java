@@ -20,16 +20,16 @@ public class User {
     private Textbook [] sellingBooks;
     private boolean isAdmin;
     
-   public User(int id, String name, String username, String password, String address, double balance, Textbook [] shoppingCart, Textbook [] sellingBooks, boolean isAdmin)
+   public User(String name, String username, String password, double balance, boolean isAdmin)
    {
-       this.id = id;
+//       this.id = id;
        this.name = name;
        this.username = username;
        this.password = password;
-       this.address = address;
+//       this.address = address;
        this.balance = balance;
-       this.shoppingCart = shoppingCart;
-       this.sellingBooks = sellingBooks;
+//       this.shoppingCart = ;
+//       this.sellingBooks = sellingBooks;
        this.isAdmin = isAdmin;
        
    }

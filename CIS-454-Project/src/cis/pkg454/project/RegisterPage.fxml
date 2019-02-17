@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -22,26 +24,46 @@
                         <Insets bottom="20.0" top="20.0" />
                      </VBox.margin>
                   </Text>
-                  <TextArea fx:id="usernameField" minHeight="20.0" prefHeight="30.0" promptText="Username">
+                  <TextField fx:id="usernameField" promptText="Username">
                      <VBox.margin>
                         <Insets left="100.0" right="100.0" />
                      </VBox.margin>
-                  </TextArea>
-                  <PasswordField promptText="Password">
+                  </TextField>
+                  <Label fx:id="usernameErr" textFill="ORANGE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" left="100.0" right="100.0" top="10.0" />
+                        <Insets right="100.0" />
                      </VBox.margin>
-                  </PasswordField>
-                  <TextArea fx:id="emailField" minHeight="20.0" prefHeight="30.0" promptText="Email">
+                  </Label>
+                  <PasswordField promptText="Password">
                      <VBox.margin>
                         <Insets bottom="10.0" left="100.0" right="100.0" />
                      </VBox.margin>
-                  </TextArea>
+                  </PasswordField>
+                  <TextField fx:id="emailField" promptText="Email">
+                     <VBox.margin>
+                        <Insets left="100.0" right="100.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="emailErr" text="* Provide a valid email address" textFill="ORANGE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" right="100.0" />
+                     </VBox.margin>
+                  </Label>
                   <Button fx:id="registerButton" alignment="CENTER" mnemonicParsing="false" onAction="#registerUser" style="-fx-background-color: orange;" text="Register" />
-                  <Label fx:id="toLoginPageButton" onMouseClicked="#toLoginPage" text="Already have an account? Sign in here." textFill="#f29008" underline="true" />
                </children>
             </VBox>
          </children>
       </HBox>
+      <ImageView fx:id="backArrow" fitHeight="48.0" fitWidth="79.0" layoutX="23.0" layoutY="22.0" onMouseClicked="#toLoginPage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@white-arrow-transparent-png-21.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
