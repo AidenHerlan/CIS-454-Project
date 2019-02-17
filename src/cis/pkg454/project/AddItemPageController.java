@@ -91,7 +91,7 @@ public class AddItemPageController implements Initializable {
     }
 
     @FXML
-    private void addItem(ActionEvent event) {
+    private void addItem(ActionEvent event) throws Exception{
         // Make sure that all fields have valid input, if not, show an error message
         if (isbnErr.getText().length() != 0 || 
                 priceErr.getText().length() != 0 ||
@@ -114,12 +114,20 @@ public class AddItemPageController implements Initializable {
         
         String query = "insert into Textbook values ("+textbookName+", "+price+", "+author+", "+isbn+id+seller+")";
         
-        // after update is successful
+        // alert and transition after update is successful
         Alert success = new Alert(AlertType.INFORMATION);
         success.setTitle("Successful!");
         success.setHeaderText(null);
         success.setContentText("Your item has been successfully added!");
         success.showAndWait();
+       
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        Parent AddItemParent = FXMLLoader.load(getClass().getResource("SellPage.fxml"));
+        Scene AddItemScene = new Scene(AddItemParent);
+        
+        window.setScene(AddItemScene);
+        window.show();
     }
     
 }
