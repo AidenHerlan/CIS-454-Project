@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
@@ -28,16 +29,32 @@
                         <Insets left="100.0" right="100.0" />
                      </VBox.margin>
                   </TextField>
+                  <Label fx:id="usernameErr" textFill="ORANGE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets right="100.0" />
+                     </VBox.margin>
+                  </Label>
                   <PasswordField promptText="Password">
                      <VBox.margin>
-                        <Insets bottom="10.0" left="100.0" right="100.0" top="10.0" />
+                        <Insets bottom="10.0" left="100.0" right="100.0" />
                      </VBox.margin>
                   </PasswordField>
                   <TextField fx:id="emailField" promptText="Email">
                      <VBox.margin>
-                        <Insets bottom="10.0" left="100.0" right="100.0" />
+                        <Insets left="100.0" right="100.0" />
                      </VBox.margin>
                   </TextField>
+                  <Label fx:id="emailErr" text="* Provide a valid email address" textFill="ORANGE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" right="100.0" />
+                     </VBox.margin>
+                  </Label>
                   <Button fx:id="registerButton" alignment="CENTER" mnemonicParsing="false" onAction="#registerUser" style="-fx-background-color: orange;" text="Register" />
                </children>
             </VBox>
