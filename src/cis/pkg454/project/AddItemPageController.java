@@ -103,7 +103,16 @@ public class AddItemPageController implements Initializable {
             return;
         }
         
-        // Create Textbook item and send to backend
+        // Get the info and send it to backend
+        String textbookName = nameField.getCharacters().toString();
+        String author = authorField.getCharacters().toString();
+        double price = Double.parseDouble(priceField.getCharacters().toString());
+        String isbn = isbnField.getCharacters().toString();
+        int id = 0;  // get from backend
+        String seller = CIS454Project.currentUser.getName();
+        
+        String query = "insert into Textbook values ("+textbookName+", "+price+", "+author+", "+isbn+id+seller+")";
+        
     }
     
 }

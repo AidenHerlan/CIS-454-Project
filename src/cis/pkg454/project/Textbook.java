@@ -13,7 +13,7 @@ public class Textbook {
     private String name;
     private double price;
     private String author;
-    private int isbn;
+    private String isbn;
     private int id;
     private String seller;
     
@@ -49,11 +49,11 @@ public class Textbook {
 {
      this.id = value;
 }
-    public int getIsbn()
+    public String getIsbn()
 {
     return this.isbn;
 }
-    public void setIsbn(int value)
+    public void setIsbn(String value)
 {
      this.isbn = value;
 }

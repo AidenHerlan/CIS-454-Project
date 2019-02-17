@@ -39,6 +39,22 @@ public class LoginPageController implements Initializable {
 
     @FXML
     void login(ActionEvent event) throws Exception{
+        String username = usernameField.getCharacters().toString();
+        String password = passwordField.getCharacters().toString();
+        
+        // verification
+        
+        // get user info from backend
+        String name="";
+        double balance=0.0;
+        boolean isAdmin=false;
+        
+        // update the user object
+        CIS454Project.currentUser.setName(name);
+        CIS454Project.currentUser.setBalance(balance);
+        CIS454Project.currentUser.setIsAdmin(isAdmin);
+        CIS454Project.currentUser.setUsername(username);
+        CIS454Project.currentUser.setPassword(password);
         
         // On verification, change scene to main page
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
