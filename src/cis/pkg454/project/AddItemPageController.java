@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -113,6 +114,12 @@ public class AddItemPageController implements Initializable {
         
         String query = "insert into Textbook values ("+textbookName+", "+price+", "+author+", "+isbn+id+seller+")";
         
+        // after update is successful
+        Alert success = new Alert(AlertType.INFORMATION);
+        success.setTitle("Successful!");
+        success.setHeaderText(null);
+        success.setContentText("Your item has been successfully added!");
+        success.showAndWait();
     }
     
 }
