@@ -228,6 +228,7 @@ public class AccountInfoPageController implements Initializable {
 
         if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
             // call to server to delete
+            CIS454Project.deleteAccount(CIS454Project.currentUser);
             
             // Navigate back to login page
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

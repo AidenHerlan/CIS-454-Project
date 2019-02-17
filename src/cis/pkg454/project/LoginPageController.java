@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -39,19 +40,29 @@ public class LoginPageController implements Initializable {
 
     @FXML
     void login(ActionEvent event) throws Exception{
-        
-        // On verification, change scene to main page
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        
-        Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-        Scene mainPageScene = new Scene(mainPageParent);
-        
-        window.setScene(mainPageScene);
-        window.show();
+        // Authenticate credentials provided
+        if (CIS454Project.login(usernameField.getText(), passwordField.getText())) {
+            // On verification, change scene to main page
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+            Scene mainPageScene = new Scene(mainPageParent);
+
+            window.setScene(mainPageScene);
+            window.show();
+        }
+        else {
+            // If credentials are not valid, show an error message
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Please fill in both fields with the correct username and password");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     void toRegisterPage(Event event) throws Exception {
+        // Load register page fxml and set scene
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
         Parent registerParent = FXMLLoader.load(getClass().getResource("RegisterPage.fxml"));

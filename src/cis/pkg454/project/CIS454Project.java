@@ -40,6 +40,36 @@ public class CIS454Project extends Application {
         currentUser = newUser;
         // Update backend with new user object
     }
+    
+    /**
+     * Checks the provided credentials against users in the database.
+     * Sets the current user to the one whose credentials have been provided if valid and returns true
+     * Returns false if there are invalid credentials
+     * @param username
+     * @param password
+     * @return 
+     */
+    static public boolean login(String username, String password) {
+        // Check if username/password combo exists in database, if not then return false
+        
+        // Set currentUser to the user if the credentials are valid
+        
+        return true;
+    }
+    
+    /**
+     * Since the user is logging out, it is no longer the current user
+     */
+    static public void logout() {
+        currentUser = null;
+    }
+    
+    static public void deleteAccount(User user) {
+        // Log the user out of the application
+        logout();
+        
+        // Delete user from database, and all textbooks sold by this user
+    }
 
     /**
      * @param args the command line arguments
