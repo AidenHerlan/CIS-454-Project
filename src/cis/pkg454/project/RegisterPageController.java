@@ -69,13 +69,7 @@ public class RegisterPageController implements Initializable {
         }
         
         // Build connection with backend and get the appropriate id for the new user
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/CIS454Database;create=true;user=CIS454;password=group19");
-        }
-        catch (SQLException e) {
-            System.out.println("Connection exception!");
-        }
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/CIS454Database;create=true;user=CIS454;password=group19");
         Statement statement = connection.createStatement();
         String query = "SELECT MAX(id) AS maxID FROM UserTable";
         ResultSet resultSet = statement.executeQuery(query);
@@ -98,6 +92,7 @@ public class RegisterPageController implements Initializable {
             return;
         }
         
+        // Add user into to backend
         query = "insert into UserTable (id, username, password, email, name, phoneNumber) values ("+id+", '"+username+"', '"+password+"', '"+email+"', 'test', '')";
         statement.executeUpdate(query);
         

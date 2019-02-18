@@ -6,6 +6,11 @@
 package cis.pkg454.project;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -123,14 +128,27 @@ public class AccountInfoPageController implements Initializable {
         
         // Set up validation hints for each field
         usernameField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            // If the input is invalid, create and add label notifying user
-            if (usernameField.getCharacters().length() > 0) {  //replace later with username validation
+            // Build connection with backend and check if username is duplicate, create and add label notifying user
+            String username = usernameField.getCharacters().toString();
+            String query = "SELECT * FROM UserTable WHERE username = '"+username+"'";;
+            Connection connection;
+            Statement statement;
+            ResultSet resultSet;
+            try {
+                connection = DriverManager.getConnection("jdbc:derby://localhost:1527/CIS454Database;create=true;user=CIS454;password=group19");
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(query);
+                if (resultSet.next()) {
                 usernameErr.setText("* This username is already taken");
                 usernameErr.setWrapText(true);
+                }
+                // Else, remove any existing label from the grid
+                else {
+                    usernameErr.setText("");
+                }
             }
-            // Else, remove any existing label from the grid
-            else {
-                usernameErr.setText("");
+            catch (SQLException e) {
+                System.out.println("SQL exception!");
             }
         });
         emailField.focusedProperty().addListener((observable, oldValue, newValue) -> {
