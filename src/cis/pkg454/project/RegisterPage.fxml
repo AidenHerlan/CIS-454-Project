@@ -37,7 +37,7 @@
                         <Insets right="100.0" />
                      </VBox.margin>
                   </Label>
-                  <PasswordField promptText="Password">
+                  <PasswordField fx:id="passwordField" promptText="Password">
                      <VBox.margin>
                         <Insets bottom="10.0" left="100.0" right="100.0" />
                      </VBox.margin>

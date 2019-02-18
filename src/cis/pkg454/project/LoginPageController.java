@@ -53,7 +53,6 @@ public class LoginPageController implements Initializable {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection("jdbc:derby://localhost:1527/CIS454Database;create=true;user=CIS454;password=group19");
-            System.out.println("Connection created!");
         }
         catch (SQLException e) {
             System.out.println("Connection exception!");

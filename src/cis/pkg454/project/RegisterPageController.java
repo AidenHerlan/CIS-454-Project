@@ -6,6 +6,11 @@
 package cis.pkg454.project;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -33,7 +38,8 @@ public class RegisterPageController implements Initializable {
 
     @FXML
     private TextField usernameField;
-
+    @FXML
+    private TextField passwordField;
     @FXML
     private Button registerButton;
 
@@ -61,7 +67,46 @@ public class RegisterPageController implements Initializable {
             alert.setContentText("Please input valid information in all fields");
             alert.showAndWait();
         }
-
+        
+        // Build connection with backend and get the appropriate id for the new user
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/CIS454Database;create=true;user=CIS454;password=group19");
+        }
+        catch (SQLException e) {
+            System.out.println("Connection exception!");
+        }
+        Statement statement = connection.createStatement();
+        String query = "SELECT MAX(id) AS maxID FROM UserTable";
+        ResultSet resultSet = statement.executeQuery(query);
+        resultSet.next();
+        int maxID = resultSet.getInt("maxID");
+        int id = maxID+1;
+        
+        // check if username is unique
+        String username = usernameField.getCharacters().toString();
+        String password = passwordField.getCharacters().toString();
+        String email = emailField.getCharacters().toString();
+        query = "SELECT * FROM UserTable WHERE username = '"+username+"'";
+        resultSet = statement.executeQuery(query);
+        if (resultSet.next()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Username has been used");
+            alert.setHeaderText(null);
+            alert.setContentText("Please use another username!");
+            alert.showAndWait();
+            return;
+        }
+        
+        query = "insert into UserTable (id, username, password, email, name, phoneNumber) values ("+id+", '"+username+"', '"+password+"', '"+email+"', 'test', '')";
+        statement.executeUpdate(query);
+        
+        // update the user object
+        CIS454Project.currentUser.setUsername(username);
+        CIS454Project.currentUser.setPassword(password);
+        CIS454Project.currentUser.setEmail(email);
+        CIS454Project.currentUser.setId(id);
+        
         // On successful registraction, change scene to main page
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
