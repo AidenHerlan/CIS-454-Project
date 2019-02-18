@@ -17,6 +17,8 @@ public class Textbook {
     private int id;
     private int sellerID;
     
+    
+    // Constructor for making a new textbook, when an item is being added to the marketplace
     public Textbook(String name, double price, String author, String isbn) {
         this.name = name;
         this.price = price;
@@ -25,6 +27,15 @@ public class Textbook {
         // Fill in once database is available
 //        this.id = last id in database + 1
 //        this.sellerID = currentUser.ID
+    }
+    
+    // Constructor for modifying a textbook post
+    public Textbook(Textbook oldBook, String name, double price, String author, String isbn) {
+        this.name = name;
+        this.price = price;
+        this.author = author;
+        this.isbn = isbn;
+        this.id = oldBook.getId();
     }
     
     public String getName()

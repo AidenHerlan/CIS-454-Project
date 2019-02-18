@@ -33,16 +33,6 @@ public class CIS454Project extends Application {
     }
     
     /**
-     * Updates the correct user object in the database
-     * Sets the current user to the new user object with updated information
-     * @param newUser 
-     */
-    static public void updateUser(User newUser) {
-        currentUser = newUser;
-        // Update backend with new user object
-    }
-    
-    /**
      * Checks the provided credentials against users in the database.
      * Sets the current user to the one whose credentials have been provided if valid and returns true
      * Returns false if there are invalid credentials
@@ -52,6 +42,7 @@ public class CIS454Project extends Application {
      */
     static public boolean login(String username, String password) {
         // Check if username/password combo exists in database, if not then return false
+        // If the combination exists, get the User object from the database
         
         // Set currentUser to the user if the credentials are valid
         
@@ -65,6 +56,20 @@ public class CIS454Project extends Application {
         currentUser = null;
     }
     
+    /**
+     * Updates the correct user object in the database
+     * Sets the current user to the new user object with updated information
+     * @param newUser 
+     */
+    static public void updateUser(User newUser) {
+        currentUser = newUser;
+        // Update backend with new user object
+    }
+    
+    /**
+     * Logs the user out of the application and deletes their record from the database
+     * @param user 
+     */
     static public void deleteAccount(User user) {
         // Log the user out of the application
         logout();
@@ -106,7 +111,7 @@ public class CIS454Project extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         launch(args);
     }
     
