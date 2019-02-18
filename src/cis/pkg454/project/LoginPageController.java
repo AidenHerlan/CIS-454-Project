@@ -6,6 +6,11 @@
 package cis.pkg454.project;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -15,6 +20,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -43,14 +50,34 @@ public class LoginPageController implements Initializable {
         String password = passwordField.getCharacters().toString();
         
         // verification
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/CIS454Database;create=true;user=CIS454;password=group19");
+            System.out.println("Connection created!");
+        }
+        catch (SQLException e) {
+            System.out.println("Connection exception!");
+        }
+        Statement statement = connection.createStatement();
+        String query = "SELECT name, balance, isAdmin, email, phoneNumber, address, id FROM UserTable WHERE username = '"+username+"' AND password = '"+password+"'";
+        ResultSet resultSet = statement.executeQuery(query);
+        if (!resultSet.next()) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Wrong username/password");
+            alert.setHeaderText(null);
+            alert.setContentText("Your username/password is wrong!");
+            alert.showAndWait();
+            return;
+        }
         
         // get user info from backend
-        String name="";
-        double balance=0.0;
-        boolean isAdmin=false;
-        String email="";
-        String phoneNumber="";
-        String address="";
+        String name = resultSet.getString("name");
+        double balance = resultSet.getDouble("balance");
+        boolean isAdmin = resultSet.getBoolean("isAdmin");
+        String email = resultSet.getString("email");
+        String phoneNumber = resultSet.getString("phoneNumber");
+        String address = resultSet.getString("address");
+        int id = resultSet.getInt("id");
         
         // update the user object
         CIS454Project.currentUser.setName(name);
@@ -61,6 +88,7 @@ public class LoginPageController implements Initializable {
         CIS454Project.currentUser.setEmail(email);
         CIS454Project.currentUser.setPhoneNumber(phoneNumber);
         CIS454Project.currentUser.setAddress(address);
+        CIS454Project.currentUser.setId(id);
         
         // On verification, change scene to main page
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
