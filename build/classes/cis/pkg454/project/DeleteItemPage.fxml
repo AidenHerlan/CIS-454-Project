@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #3e7fe8;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="cis.pkg454.project.DeleteItemPageController">
+   <children>
+      <ImageView fx:id="backArrow" fitHeight="48.0" fitWidth="79.0" layoutX="13.0" layoutY="12.0" onMouseClicked="#toSellPage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@white-arrow-transparent-png-21.png" />
+         </image>
+      </ImageView>
+      <VBox layoutY="76.0" prefHeight="464.0" prefWidth="750.0">
+         <children>
+            <Label text="Delete Items" textFill="WHITE">
+               <font>
+                  <Font size="39.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label prefHeight="38.0" prefWidth="655.0" text="Check the boxes of items you want to delete, then press Delete Items to delete them." textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Label>
+            <TableView editable="true" prefHeight="310.0" prefWidth="750.0">
+               <columns>
+                  <TableColumn fx:id="titleCol" editable="false" prefWidth="263.36659449338913" text="Title" />
+                  <TableColumn fx:id="authorCol" editable="false" minWidth="0.0" prefWidth="231.6333770751953" text="Author" />
+                  <TableColumn fx:id="isbnCol" editable="false" minWidth="0.0" prefWidth="110.48843383789062" text="ISBN" />
+                  <TableColumn fx:id="priceCol" prefWidth="85.266845703125" text="Price" />
+                  <TableColumn prefWidth="60.80670166015625" text="Delete" />
+               </columns>
+            </TableView>
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteItems" style="-fx-background-color: #c9deff;" text="Delete Items">
+               <VBox.margin>
+                  <Insets left="620.0" top="15.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
