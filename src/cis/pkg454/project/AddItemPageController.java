@@ -90,7 +90,7 @@ public class AddItemPageController implements Initializable {
     }
 
     @FXML
-    private void addItem(ActionEvent event) {
+    private void addItem(ActionEvent event) throws Exception {
         // Make sure that all fields have valid input, if not, show an error message
         if (isbnErr.getText().length() != 0 || 
                 priceErr.getText().length() != 0 ||
@@ -104,6 +104,22 @@ public class AddItemPageController implements Initializable {
         }
         
         // Create Textbook item and send to backend
+        Textbook newTextbook = new Textbook(nameField.getText(), Double.valueOf(priceField.getText()), authorField.getText(), isbnField.getText());
+        CIS454Project.addItem(newTextbook);
+        
+        // Show success message and navigate back to main page
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setContentText("Your item has been added successfully.");
+        alert.showAndWait();
+        
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        Parent sellPageParent = FXMLLoader.load(getClass().getResource("SellPage.fxml"));
+        Scene sellPageScene = new Scene(sellPageParent);
+        
+        window.setScene(sellPageScene);
+        window.show();
     }
     
 }

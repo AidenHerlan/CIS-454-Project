@@ -14,17 +14,17 @@ public class Payment {
     private int textbookID;
     private int sellerID;
     private int buyerID;
-    private int cardNum;
-    private int cardSecuCode;
-    private int cardExp;
-    private int accNum;
-    private int routingNum;
+    private String cardNum;
+    private String cardSecuCode;
+    private String cardExp;
+    private String accNum;
+    private String routingNum;
     private Boolean method;  // 0 for credit card, 1 for check
     private double price;
     
     // Constructor for card payments
-    public Payment(int ID, int textbookID, int sellerID, int buyerID, int cardNum, int cardSecuCode, int cardExp, double price) {
-        this.ID = ID;
+    public Payment(int textbookID, int sellerID, int buyerID, String cardNum, String cardSecuCode, String cardExp, double price) {
+//        this.ID = ID; Set to be the highest ID + 1
         this.textbookID = textbookID;
         this.sellerID = sellerID;
         this.buyerID = buyerID;
@@ -36,8 +36,8 @@ public class Payment {
     }
     
     // Constructor for check payments
-    public Payment(int ID, int textbookID, int sellerID, int buyerID, int accNum, int routingNum, double price) {
-        this.ID = ID;
+    public Payment(int textbookID, int sellerID, int buyerID, String accNum, String routingNum, double price) {
+//        this.ID = ID; Set to be the highest ID + 1
         this.textbookID = textbookID;
         this.sellerID = sellerID;
         this.buyerID = buyerID;
@@ -63,23 +63,23 @@ public class Payment {
         return this.buyerID;
     }
     
-    public int getCardNum() {
+    public String getCardNum() {
         return this.cardNum;
     }
     
-    public int getCardSecuCode() {
+    public String getCardSecuCode() {
         return this.cardSecuCode;
     }
     
-    public int getCardExp() {
+    public String getCardExp() {
         return this.cardExp;
     }
     
-    public int getAccNum() {
+    public String getAccNum() {
         return this.accNum;
     }
     
-    public int getRoutingNum() {
+    public String getRoutingNum() {
         return this.routingNum;
     }
     

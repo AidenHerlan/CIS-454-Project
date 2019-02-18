@@ -125,7 +125,8 @@ public class MainPageController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
 
         if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
-            // logic for logout
+            // Log the user out
+            CIS454Project.logout();
             
             // Load report issue page fxml file and set to scene in order to navigate
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
