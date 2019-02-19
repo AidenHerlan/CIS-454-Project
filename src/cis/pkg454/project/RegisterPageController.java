@@ -7,6 +7,7 @@ package cis.pkg454.project;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.apache.derby.jdbc.EmbeddedDriver;
 
 /**
  * FXML Controller class
@@ -69,7 +71,9 @@ public class RegisterPageController implements Initializable {
         }
         
         // Build connection with backend and get the appropriate id for the new user
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/CIS454Database;create=true;user=CIS454;password=group19");
+        Driver derbyEmbeddedDriver = new EmbeddedDriver();
+        DriverManager.registerDriver(derbyEmbeddedDriver);
+        Connection connection = DriverManager.getConnection("jdbc:derby:CIS454Database;create=true");
         Statement statement = connection.createStatement();
         String query = "SELECT MAX(id) AS maxID FROM UserTable";
         ResultSet resultSet = statement.executeQuery(query);
