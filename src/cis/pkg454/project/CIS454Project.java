@@ -7,7 +7,6 @@ package cis.pkg454.project;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javafx.application.Application;
@@ -41,24 +40,52 @@ public class CIS454Project extends Application {
     }
 
     /**
-     * @param args the command line arguments
+     * @return 
      * @throws java.sql.SQLException
      */
-    public static void main(String[] args) throws SQLException {
-        Statement stmt;
-        String query = "create table UserTable (id integer not null, name varchar(30), username varchar(30) not null, password varchar(30) not null, address varchar(50), balance double default 0.0, isAdmin boolean default false, email varchar(30) not null, phoneNumber varchar(10), primary key (id))";
+    public static Connection makeConnection() throws SQLException {
         Driver derbyEmbeddedDriver = new EmbeddedDriver();
         DriverManager.registerDriver(derbyEmbeddedDriver);
         Connection connection = DriverManager.getConnection("jdbc:derby:CIS454Database;create=true");
-        stmt = connection.createStatement();
+        return connection;
+    }
+    
+    public static void createTable() throws SQLException {
+        Statement statement;
+        String query = "create table UserTable (id integer not null, name varchar(30), username varchar(30) not null, password varchar(30) not null, address varchar(50), balance double default 0.0, isAdmin boolean default false, email varchar(30) not null, phoneNumber varchar(10), primary key (id))";
+        Connection connection = makeConnection();
+        statement = connection.createStatement();
         DatabaseMetaData dbm = connection.getMetaData();
         // check if "UserTable" table is there
         ResultSet tables = dbm.getTables(null, null, "USERTABLE", new String[] {"TABLE"});
-        if (tables.next()) stmt.execute("drop table USERTABLE");
-        stmt.executeUpdate(query);
-        query = "INSERT into UserTable values (1, 'Default', 'default', 'default', '', 0.0, false, 'default@gmail.com', '3151234567')";
-        stmt.executeUpdate(query);
-                
+        if (tables.next()) statement.execute("drop table USERTABLE");
+        statement.executeUpdate(query);
+        query = "INSERT into UserTable values (1, 'Default', 'default', 'default', '', 0.0, true, 'default@gmail.com', '3151234567')";
+        statement.executeUpdate(query);
+        query = "INSERT into UserTable values (2, 'Dummy', 'dummy', 'dummy', '', 0.0, false, 'dummy@gmail.com', '3159875643')";
+        statement.executeUpdate(query);
+    }
+    
+    public static int maxID() throws SQLException {
+        Connection connection = makeConnection();
+        Statement statement = connection.createStatement();
+        String query = "SELECT MAX(id) AS maxID FROM UserTable";
+        ResultSet resultSet = statement.executeQuery(query);
+        resultSet.next();
+        return resultSet.getInt("maxID");
+    }
+    
+    public static Boolean uniqueUsername(String username) throws SQLException {
+        Connection connection = makeConnection();
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM UserTable WHERE username = '"+username+"'";
+        ResultSet resultSet = statement.executeQuery(query);
+        if (resultSet.next()) return false;
+        return true;
+    }
+    
+    public static void main(String[] args) throws SQLException {
+        createTable();
         launch(args);
     }
     

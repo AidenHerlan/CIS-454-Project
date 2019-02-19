@@ -7,10 +7,7 @@ package cis.pkg454.project;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -30,7 +27,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.apache.derby.jdbc.EmbeddedDriver;
 
 
 /**
@@ -52,10 +48,8 @@ public class LoginPageController implements Initializable {
         String password = passwordField.getCharacters().toString();
         
         // verification
-        Driver derbyEmbeddedDriver = new EmbeddedDriver();
-        DriverManager.registerDriver(derbyEmbeddedDriver);
-        Connection conn = DriverManager.getConnection("jdbc:derby:CIS454Database;create=true");
-        Statement statement = conn.createStatement();
+        Connection connection = CIS454Project.makeConnection();
+        Statement statement = connection.createStatement();
         String query = "SELECT name, balance, isAdmin, email, phoneNumber, address, id FROM UserTable WHERE username = '"+username+"' AND password = '"+password+"'";
         ResultSet resultSet = statement.executeQuery(query);
         if (!resultSet.next()) {

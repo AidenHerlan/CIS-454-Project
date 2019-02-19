@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Mon Feb 18 20:09:44 EST 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0169-034d-2ee0-00000691efe0 
+Tue Feb 19 11:38:11 EST 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0169-069f-36d1-00000691c838 
 on database directory D:\Sam\Desktop\CIS-454-Project\CIS454Database with class loader sun.misc.Launcher$AppClassLoader@55f96302 
-Loaded from file:/D:/Sam/Desktop/CIS-454-Project/dist/run2046384210/lib/derby.jar
+Loaded from file:/D:/Sam/Desktop/CIS-454-Project/dist/run1280559353/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_141-b15
 user.dir=D:\Sam\Desktop\CIS-454-Project

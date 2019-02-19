@@ -7,10 +7,6 @@ package cis.pkg454.project;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -29,7 +25,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import org.apache.derby.jdbc.EmbeddedDriver;
 
 /**
  * FXML Controller class
@@ -56,9 +51,7 @@ public class RegisterPageController implements Initializable {
 
     @FXML
     void registerUser(ActionEvent event) throws Exception {
-        // Validate that all fields have input of the correct format
-        // Check if username is already in database
-        
+        // Validate that all fields have input of the correct format        
         // If input is invalid, show an error message
         if (!emailErr.getText().equals("") || 
                 !usernameErr.getText().equals("") ||
@@ -68,26 +61,12 @@ public class RegisterPageController implements Initializable {
             alert.setTitle("Invalid Input");
             alert.setContentText("Please input valid information in all fields");
             alert.showAndWait();
+            return;
         }
-        
-        // Build connection with backend and get the appropriate id for the new user
-        Driver derbyEmbeddedDriver = new EmbeddedDriver();
-        DriverManager.registerDriver(derbyEmbeddedDriver);
-        Connection connection = DriverManager.getConnection("jdbc:derby:CIS454Database;create=true");
-        Statement statement = connection.createStatement();
-        String query = "SELECT MAX(id) AS maxID FROM UserTable";
-        ResultSet resultSet = statement.executeQuery(query);
-        resultSet.next();
-        int maxID = resultSet.getInt("maxID");
-        int id = maxID+1;
         
         // check if username is unique
         String username = usernameField.getCharacters().toString();
-        String password = passwordField.getCharacters().toString();
-        String email = emailField.getCharacters().toString();
-        query = "SELECT * FROM UserTable WHERE username = '"+username+"'";
-        resultSet = statement.executeQuery(query);
-        if (resultSet.next()) {
+        if (!CIS454Project.uniqueUsername(username)) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Username has been used");
             alert.setHeaderText(null);
@@ -96,8 +75,15 @@ public class RegisterPageController implements Initializable {
             return;
         }
         
+        // Get the appropriate id for the new user
+        int id = CIS454Project.maxID()+1;
+        
         // Add user into to backend
-        query = "insert into UserTable (id, username, password, email, name, phoneNumber) values ("+id+", '"+username+"', '"+password+"', '"+email+"', 'test', '')";
+        String password = passwordField.getCharacters().toString();
+        String email = emailField.getCharacters().toString();
+        String query = "insert into UserTable (id, username, password, email) values ("+id+", '"+username+"', '"+password+"', '"+email+"')";
+        Connection connection = CIS454Project.makeConnection();
+        Statement statement = connection.createStatement();
         statement.executeUpdate(query);
         
         // update the user object
@@ -105,6 +91,11 @@ public class RegisterPageController implements Initializable {
         CIS454Project.currentUser.setPassword(password);
         CIS454Project.currentUser.setEmail(email);
         CIS454Project.currentUser.setId(id);
+        CIS454Project.currentUser.setAddress("");
+        CIS454Project.currentUser.setBalance(0.0);
+        CIS454Project.currentUser.setIsAdmin(false);
+        CIS454Project.currentUser.setName("");
+        CIS454Project.currentUser.setPhoneNumber("");
         
         // On successful registraction, change scene to main page
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
