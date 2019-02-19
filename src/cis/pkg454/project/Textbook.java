@@ -15,7 +15,7 @@ public class Textbook {
     private String author;
     private String isbn;
     private int id;
-    private String seller;
+    private int seller;
     
     public String getName()
 {
@@ -57,11 +57,11 @@ public class Textbook {
 {
      this.isbn = value;
 }
-    public String getSeller()
+    public int getSeller()
 {
     return this.seller;
 }
-    public void setSeller(String value)
+    public void setSeller(int value)
 {
      this.seller = value;
 }

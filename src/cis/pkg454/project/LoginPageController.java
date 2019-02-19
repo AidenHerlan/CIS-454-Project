@@ -50,7 +50,7 @@ public class LoginPageController implements Initializable {
         // verification
         Connection connection = CIS454Project.makeConnection();
         Statement statement = connection.createStatement();
-        String query = "SELECT name, balance, isAdmin, email, phoneNumber, address, id FROM UserTable WHERE username = '"+username+"' AND password = '"+password+"'";
+        String query = "SELECT name, balance, isAdmin, email, phoneNumber, address, userID FROM UserTable WHERE username = '"+username+"' AND password = '"+password+"'";
         ResultSet resultSet = statement.executeQuery(query);
         if (!resultSet.next()) {
             Alert alert = new Alert(AlertType.WARNING);
@@ -68,7 +68,7 @@ public class LoginPageController implements Initializable {
         String email = resultSet.getString("email");
         String phoneNumber = resultSet.getString("phoneNumber");
         String address = resultSet.getString("address");
-        int id = resultSet.getInt("id");
+        int userID = resultSet.getInt("userID");
         
         // update the user object
         CIS454Project.currentUser.setName(name);
@@ -79,7 +79,7 @@ public class LoginPageController implements Initializable {
         CIS454Project.currentUser.setEmail(email);
         CIS454Project.currentUser.setPhoneNumber(phoneNumber);
         CIS454Project.currentUser.setAddress(address);
-        CIS454Project.currentUser.setId(id);
+        CIS454Project.currentUser.setId(userID);
         
         // On verification, change scene to main page
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

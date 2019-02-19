@@ -76,12 +76,12 @@ public class RegisterPageController implements Initializable {
         }
         
         // Get the appropriate id for the new user
-        int id = CIS454Project.maxID()+1;
+        int userID = CIS454Project.maxID()+1;
         
         // Add user into to backend
         String password = passwordField.getCharacters().toString();
         String email = emailField.getCharacters().toString();
-        String query = "insert into UserTable (id, username, password, email) values ("+id+", '"+username+"', '"+password+"', '"+email+"')";
+        String query = "insert into UserTable (userID, username, password, email) values ("+userID+", '"+username+"', '"+password+"', '"+email+"')";
         Connection connection = CIS454Project.makeConnection();
         Statement statement = connection.createStatement();
         statement.executeUpdate(query);
@@ -90,7 +90,7 @@ public class RegisterPageController implements Initializable {
         CIS454Project.currentUser.setUsername(username);
         CIS454Project.currentUser.setPassword(password);
         CIS454Project.currentUser.setEmail(email);
-        CIS454Project.currentUser.setId(id);
+        CIS454Project.currentUser.setId(userID);
         CIS454Project.currentUser.setAddress("");
         CIS454Project.currentUser.setBalance(0.0);
         CIS454Project.currentUser.setIsAdmin(false);

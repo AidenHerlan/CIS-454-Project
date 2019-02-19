@@ -12,3 +12,8 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=D:\Sam\Desktop\CIS-454-Project\src\cis
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Tue Feb 19 16:28:24 EST 2019: Shutting down Derby engine
+----------------------------------------------------------------
+Tue Feb 19 16:28:25 EST 2019:
+Shutting down instance a816c00e-0169-031f-6f2e-fffff0026775 on database directory D:\Sam\Desktop\CIS-454-Project\src\cis\CIS454Database with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
