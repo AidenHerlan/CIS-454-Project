@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  * @author OliviaFlynn
  */
 public class CIS454Project extends Application {
-    static public User currentUser = new User("joe98", "joe@joe.com", "", 1.0, false);
+    static public User currentUser = new User("joe98", "joe@joe.com", "", 100.0, true);
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -57,6 +57,16 @@ public class CIS454Project extends Application {
     }
     
     /**
+     * Checks if the username is already used by another user (returns false) or not (returns true)
+     * @param username
+     * @return 
+     */
+    static public boolean usernameAvailable(String username) {
+        //Check in the database
+        return true;
+    }
+    
+    /**
      * Updates the correct user object in the database
      * Sets the current user to the new user object with updated information
      * @param newUser 
@@ -78,6 +88,17 @@ public class CIS454Project extends Application {
     }
     
     /**
+     * Creates a new user entry in the database
+     * @param newUser 
+     */
+    static public void registerUser(User newUser) {
+        // Set the user to the current user
+        currentUser = newUser;
+        
+        // Add the new user to the database
+    }
+    
+    /**
      * Adds the specified item to the user's selling list and adds to the database of books being sold
      * @param item 
      */
@@ -89,11 +110,41 @@ public class CIS454Project extends Application {
     }
     
     /**
+     * Modifies the specified item in the user's selling list and in the database of books being sold
+     * @param updatedBook 
+     */
+    static public void modifyItem(Textbook updatedBook) {
+        // Modify the item in the user's selling list by getting the seller User object from the 
+        // SellerID member of Textbook, and getting their selling list
+        
+        // Modify the item in the database of items being sold
+    }
+    
+    /**
+     * Deletes the specified item from the user's selling list and from the database of books being sold
+     * @param updatedBook 
+     */
+    static public void deleteItem(Textbook textbook) {
+        // Delete the item from the user's selling list by getting the seller User object from the 
+        // SellerID member of Textbook, and getting their selling list
+        
+        // Delete the item in the database of items being sold
+    }
+    
+    /**
      * Adds the specified report to the database
      * @param report 
      */
     static public void addReport(Report report) {
         // Add the item to the database of reports
+    }
+    
+    /**
+     * Updates a report item, used for resolving reports or adding comments
+     * @param report 
+     */
+    static public void updateReport(Report report) {
+        // Change the report's status to resolved
     }
 
     /**

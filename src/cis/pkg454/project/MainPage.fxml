@@ -21,7 +21,7 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <VBox prefHeight="490.0" prefWidth="191.0" style="-fx-background-color: #99bbef;">
+                        <VBox fx:id="buttonMenu" prefHeight="490.0" prefWidth="191.0" style="-fx-background-color: #99bbef;">
                            <children>
                               <Button fx:id="accountInfoBtn" minHeight="50.0" mnemonicParsing="false" onAction="#toAccountInfoPage" prefHeight="60.0" prefWidth="187.5" style="-fx-background-color: #b6d2ff; -fx-border-color: white;" text="Account Info" />
                               <Button fx:id="shoppingCartBtn" minHeight="50.0" mnemonicParsing="false" onAction="#toShoppingCartPage" prefHeight="60.0" prefWidth="187.5" style="-fx-background-color: #b6d2ff; -fx-border-color: white;" text="Shopping Cart" />

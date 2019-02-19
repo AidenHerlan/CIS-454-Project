@@ -161,7 +161,7 @@ public class CheckoutPageController implements Initializable {
             });
             routingNumberField.focusedProperty().addListener((observable, oldValue, newValue) -> {
                 // If the input is invalid, create and add label notifying user
-                if(!accountNumberField.getCharacters().toString().matches("[0-9]+") || 
+                if(!routingNumberField.getCharacters().toString().matches("[0-9]+") || 
                         routingNumberField.getCharacters().length() != 9) { 
                     routingNumberErr.setText("* Must be 9 numbers");
                     routingNumberErr.setWrapText(true);

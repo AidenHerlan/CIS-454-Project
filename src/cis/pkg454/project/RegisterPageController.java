@@ -45,6 +45,8 @@ public class RegisterPageController implements Initializable {
     private Label usernameErr;
     @FXML
     private Label emailErr;
+    @FXML
+    private PasswordField passwordField;
 
     @FXML
     void registerUser(ActionEvent event) throws Exception {
@@ -62,14 +64,30 @@ public class RegisterPageController implements Initializable {
             alert.showAndWait();
         }
 
-        // On successful registraction, change scene to main page
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        
-        Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-        Scene mainPageScene = new Scene(mainPageParent);
-        
-        window.setScene(mainPageScene);
-        window.show();
+        if (CIS454Project.usernameAvailable(usernameField.getCharacters().toString())) {
+            // Create a User object and register the user in the database
+            User newUser = new User(
+                    usernameField.getCharacters().toString(),
+                    emailField.getCharacters().toString(),
+                    passwordField.getCharacters().toString(),
+                    100.0, false);
+            CIS454Project.registerUser(newUser);
+            
+            // On successful registraction, change scene to main page
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+            Scene mainPageScene = new Scene(mainPageParent);
+
+            window.setScene(mainPageScene);
+            window.show();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Username Unavailable");
+            alert.setContentText("Please try another username");
+            alert.showAndWait();
+        }
     }
     
     /**

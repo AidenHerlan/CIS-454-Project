@@ -26,7 +26,7 @@ public class Textbook {
         this.isbn = isbn;
         // Fill in once database is available
 //        this.id = last id in database + 1
-//        this.sellerID = currentUser.ID
+        this.sellerID = CIS454Project.currentUser.getId();
     }
     
     // Constructor for modifying a textbook post
@@ -36,6 +36,8 @@ public class Textbook {
         this.author = author;
         this.isbn = isbn;
         this.id = oldBook.getId();
+        this.sellerID = CIS454Project.currentUser.getId();
+
     }
     
     public String getName()
