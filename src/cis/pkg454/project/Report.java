@@ -11,7 +11,7 @@ public class Report {
     private int id;
     private int reporteeId;
     private String type;
-    private String status;
+    private Boolean status;  // 0 for unsolved, 1 for solved
     private String description;
     private String comment;
     
@@ -39,11 +39,11 @@ public class Report {
 {
      this.type = value;
 }
-    public String getStatus()
+    public Boolean getStatus()
 {
     return this.status;
 }
-    public void setStatus(String value)
+    public void setStatus(Boolean value)
 {
      this.status = value;
 }

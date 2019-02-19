@@ -76,7 +76,7 @@ public class RegisterPageController implements Initializable {
         }
         
         // Get the appropriate id for the new user
-        int userID = CIS454Project.maxID()+1;
+        int userID = CIS454Project.maxUserID()+1;
         
         // Add user into to backend
         String password = passwordField.getCharacters().toString();
