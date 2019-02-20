@@ -84,13 +84,8 @@ public class RegisterPageController implements Initializable {
         Statement statement = connection.createStatement();
         statement.executeUpdate(query);
         
-        // Create a User object and set to be the current user
-        User newUser = new User(
-        usernameField.getCharacters().toString(),
-        emailField.getCharacters().toString(),
-        passwordField.getCharacters().toString(),
-        100.0, false);
-        CIS454Project.currentUser = newUser;
+        // Login in
+        CIS454Project.login(username, password);
         
         // On successful registraction, change scene to main page
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

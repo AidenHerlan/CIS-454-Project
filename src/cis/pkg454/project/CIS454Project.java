@@ -26,7 +26,7 @@ import java.sql.SQLException;
  * @author OliviaFlynn
  */
 public class CIS454Project extends Application {
-    public static User currentUser = new User("joe98", "joe@joe.com", "", 100.0, true);
+    public static User currentUser = new User("", "", "", 0.0, true);
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -48,11 +48,33 @@ public class CIS454Project extends Application {
      * @param password
      * @return 
      */
-    static public boolean login(String username, String password) {
-        // Check if username/password combo exists in database, if not then return false
-        // If the combination exists, get the User object from the database
+    static public boolean login(String username, String password) throws SQLException  {
+        // if username/password combo does not exist in database, return false
+        Connection connection = makeConnection();
+        Statement statement = connection.createStatement();
+        String query = "SELECT name, balance, isAdmin, email, phoneNumber, address, userID FROM UserTable WHERE username = '"+username+"' AND password = '"+password+"'";
+        ResultSet resultSet = statement.executeQuery(query);
+        if (!resultSet.next()) return false;
         
-        // Set currentUser to the user if the credentials are valid
+        // get user info from backend
+        String name = resultSet.getString("name");
+        double balance = resultSet.getDouble("balance");
+        boolean isAdmin = resultSet.getBoolean("isAdmin");
+        String email = resultSet.getString("email");
+        String phoneNumber = resultSet.getString("phoneNumber");
+        String address = resultSet.getString("address");
+        int userID = resultSet.getInt("userID");
+        
+        // update the user object
+        currentUser.setName(name);
+        currentUser.setBalance(balance);
+        currentUser.setIsAdmin(isAdmin);
+        currentUser.setUsername(username);
+        currentUser.setPassword(password);
+        currentUser.setEmail(email);
+        currentUser.setPhoneNumber(phoneNumber);
+        currentUser.setAddress(address);
+        currentUser.setId(userID);
         
         return true;
     }
@@ -60,8 +82,18 @@ public class CIS454Project extends Application {
     /**
      * Since the user is logging out, it is no longer the current user
      */
-    static public void logout() {
-        currentUser = null;
+    public static void logout() {
+        currentUser.setId(0);
+        currentUser.setName("");
+        currentUser.setUsername("");
+        currentUser.setEmail("");
+        currentUser.setPassword("");
+        currentUser.setAddress("");
+        currentUser.setPhoneNumber("");
+        currentUser.setBalance(0.0);
+        currentUser.setShoppingCart(new ArrayList<>());
+        currentUser.setSellingBooks(new ArrayList<>());
+        currentUser.setIsAdmin(false); 
     }
     
     /**
@@ -70,7 +102,7 @@ public class CIS454Project extends Application {
      * @return 
      */
     static public boolean usernameAvailable(String username) {
-        //Check in the database
+        // Check in the database
         return true;
     }
     
@@ -187,7 +219,7 @@ public class CIS454Project extends Application {
         ResultSet tables = dbm.getTables(null, null, "USERTABLE", new String[] {"TABLE"});
         if (!tables.next()) {
             //statement.execute("drop table USERTABLE");
-            query = "create table UserTable if not exists (userID integer not null, name varchar(30), username varchar(30) not null, password varchar(30) not null, address varchar(50), balance double default 0.0, isAdmin boolean default false, email varchar(30) not null, phoneNumber varchar(10), primary key (userID))";
+            query = "create table UserTable (userID integer not null, name varchar(30), username varchar(30) not null, password varchar(30) not null, address varchar(50), balance double default 0.0, isAdmin boolean default false, email varchar(30) not null, phoneNumber varchar(10), primary key (userID))";
             statement.executeUpdate(query);
             query = "INSERT into UserTable values (1, 'Default', 'default', 'default', '', 0.0, true, 'default@gmail.com', '3151234567')";
             statement.executeUpdate(query);

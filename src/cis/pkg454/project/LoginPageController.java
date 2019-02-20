@@ -48,11 +48,7 @@ public class LoginPageController implements Initializable {
         String password = passwordField.getCharacters().toString();
         
         // verification
-        Connection connection = CIS454Project.makeConnection();
-        Statement statement = connection.createStatement();
-        String query = "SELECT name, balance, isAdmin, email, phoneNumber, address, userID FROM UserTable WHERE username = '"+username+"' AND password = '"+password+"'";
-        ResultSet resultSet = statement.executeQuery(query);
-        if (!resultSet.next()) {
+        if (!CIS454Project.login(username, password)) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Wrong username/password");
             alert.setHeaderText(null);
@@ -60,26 +56,6 @@ public class LoginPageController implements Initializable {
             alert.showAndWait();
             return;
         }
-        
-        // get user info from backend
-        String name = resultSet.getString("name");
-        double balance = resultSet.getDouble("balance");
-        boolean isAdmin = resultSet.getBoolean("isAdmin");
-        String email = resultSet.getString("email");
-        String phoneNumber = resultSet.getString("phoneNumber");
-        String address = resultSet.getString("address");
-        int userID = resultSet.getInt("userID");
-        
-        // update the user object
-        CIS454Project.currentUser.setName(name);
-        CIS454Project.currentUser.setBalance(balance);
-        CIS454Project.currentUser.setIsAdmin(isAdmin);
-        CIS454Project.currentUser.setUsername(username);
-        CIS454Project.currentUser.setPassword(password);
-        CIS454Project.currentUser.setEmail(email);
-        CIS454Project.currentUser.setPhoneNumber(phoneNumber);
-        CIS454Project.currentUser.setAddress(address);
-        CIS454Project.currentUser.setId(userID);
         
         // On verification, change scene to main page
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
