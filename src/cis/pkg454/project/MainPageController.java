@@ -21,6 +21,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -58,13 +59,22 @@ public class MainPageController implements Initializable {
     private Button reviewButton;
     @FXML
     private Button adminManagementButton;
+    @FXML
+    private VBox buttonMenu;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // Set the greeting text
+        greetingText.setText("Welcome " + CIS454Project.currentUser.getUsername());
+        
+        // Take away admin features if the user is not an admin
+        if (!CIS454Project.currentUser.getIsAdmin()) {
+            buttonMenu.getChildren().remove(reviewButton);
+            buttonMenu.getChildren().remove(adminManagementButton);
+        }
     }    
 
     @FXML

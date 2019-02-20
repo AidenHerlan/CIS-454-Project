@@ -6,6 +6,8 @@
 package cis.pkg454.project;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -33,10 +35,8 @@ public class RegisterPageController implements Initializable {
 
     @FXML
     private TextField usernameField;
-
     @FXML
     private Button registerButton;
-
     @FXML
     private TextField emailField;
     @FXML
@@ -45,12 +45,12 @@ public class RegisterPageController implements Initializable {
     private Label usernameErr;
     @FXML
     private Label emailErr;
+    @FXML
+    private PasswordField passwordField;
 
     @FXML
     void registerUser(ActionEvent event) throws Exception {
-        // Validate that all fields have input of the correct format
-        // Check if username is already in database
-        
+        // Validate that all fields have input of the correct format        
         // If input is invalid, show an error message
         if (!emailErr.getText().equals("") || 
                 !usernameErr.getText().equals("") ||
@@ -60,8 +60,38 @@ public class RegisterPageController implements Initializable {
             alert.setTitle("Invalid Input");
             alert.setContentText("Please input valid information in all fields");
             alert.showAndWait();
+            return;
         }
-
+        // If fields are valid, check if username is unique
+        String username = usernameField.getCharacters().toString();
+        if (!CIS454Project.uniqueUsername(username)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Username has been used");
+            alert.setHeaderText(null);
+            alert.setContentText("Please use another username!");
+            alert.showAndWait();
+            return;
+        }
+        
+        // Get the appropriate id for the new user
+        int userID = CIS454Project.maxUserID()+1;
+        
+        // Add user into to backend
+        String password = passwordField.getCharacters().toString();
+        String email = emailField.getCharacters().toString();
+        String query = "insert into UserTable (userID, username, password, email) values ("+userID+", '"+username+"', '"+password+"', '"+email+"')";
+        Connection connection = CIS454Project.makeConnection();
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(query);
+        
+        // Create a User object and set to be the current user
+        User newUser = new User(
+        usernameField.getCharacters().toString(),
+        emailField.getCharacters().toString(),
+        passwordField.getCharacters().toString(),
+        100.0, false);
+        CIS454Project.currentUser = newUser;
+        
         // On successful registraction, change scene to main page
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         

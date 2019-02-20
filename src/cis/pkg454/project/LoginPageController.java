@@ -6,6 +6,9 @@
 package cis.pkg454.project;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -16,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -40,24 +44,51 @@ public class LoginPageController implements Initializable {
 
     @FXML
     void login(ActionEvent event) throws Exception{
-        // Authenticate credentials provided
-        if (CIS454Project.login(usernameField.getText(), passwordField.getText())) {
-            // On verification, change scene to main page
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-            Scene mainPageScene = new Scene(mainPageParent);
-
-            window.setScene(mainPageScene);
-            window.show();
-        }
-        else {
-            // If credentials are not valid, show an error message
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("Please fill in both fields with the correct username and password");
+        String username = usernameField.getCharacters().toString();
+        String password = passwordField.getCharacters().toString();
+        
+        // verification
+        Connection connection = CIS454Project.makeConnection();
+        Statement statement = connection.createStatement();
+        String query = "SELECT name, balance, isAdmin, email, phoneNumber, address, userID FROM UserTable WHERE username = '"+username+"' AND password = '"+password+"'";
+        ResultSet resultSet = statement.executeQuery(query);
+        if (!resultSet.next()) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Wrong username/password");
+            alert.setHeaderText(null);
+            alert.setContentText("Your username/password is wrong!");
             alert.showAndWait();
+            return;
         }
+        
+        // get user info from backend
+        String name = resultSet.getString("name");
+        double balance = resultSet.getDouble("balance");
+        boolean isAdmin = resultSet.getBoolean("isAdmin");
+        String email = resultSet.getString("email");
+        String phoneNumber = resultSet.getString("phoneNumber");
+        String address = resultSet.getString("address");
+        int userID = resultSet.getInt("userID");
+        
+        // update the user object
+        CIS454Project.currentUser.setName(name);
+        CIS454Project.currentUser.setBalance(balance);
+        CIS454Project.currentUser.setIsAdmin(isAdmin);
+        CIS454Project.currentUser.setUsername(username);
+        CIS454Project.currentUser.setPassword(password);
+        CIS454Project.currentUser.setEmail(email);
+        CIS454Project.currentUser.setPhoneNumber(phoneNumber);
+        CIS454Project.currentUser.setAddress(address);
+        CIS454Project.currentUser.setId(userID);
+        
+        // On verification, change scene to main page
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
+        Parent mainPageParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        Scene mainPageScene = new Scene(mainPageParent);
+        
+        window.setScene(mainPageScene);
+        window.show();
     }
 
     @FXML

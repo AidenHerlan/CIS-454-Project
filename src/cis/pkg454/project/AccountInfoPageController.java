@@ -6,6 +6,11 @@
 package cis.pkg454.project;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -66,12 +71,12 @@ public class AccountInfoPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // get user object, fill labels
-        usernameText.setText("Username: " + CIS454Project.currentUser.getUsername());
-        nameText.setText("Name: " + CIS454Project.currentUser.getName());
-        emailText.setText("Email: " + CIS454Project.currentUser.getEmail());
-        addressText.setText("Address: " + CIS454Project.currentUser.getAddress());
-        phoneNumberText.setText("Phone Number: " + CIS454Project.currentUser.getPhoneNumber());
-        idText.setText("Account ID: " + CIS454Project.currentUser.getId());
+        usernameText.setText("Username: "+CIS454Project.currentUser.getUsername());
+        nameText.setText("Name: "+CIS454Project.currentUser.getName());
+        emailText.setText("Email: "+CIS454Project.currentUser.getEmail());
+        addressText.setText("Address: "+CIS454Project.currentUser.getAddress());
+        phoneNumberText.setText("Phone Number: "+CIS454Project.currentUser.getPhoneNumber());
+        idText.setText("Accouunt ID: "+CIS454Project.currentUser.getId());
     }    
 
     @FXML
@@ -123,14 +128,27 @@ public class AccountInfoPageController implements Initializable {
         
         // Set up validation hints for each field
         usernameField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            // If the input is invalid, create and add label notifying user
-            if (usernameField.getCharacters().length() > 0) {  //replace later with username validation
+            // Build connection with backend and check if username is duplicate, create and add label notifying user
+            String username = usernameField.getCharacters().toString();
+            String query = "SELECT * FROM UserTable WHERE username = '"+username+"'";;
+            Connection connection;
+            Statement statement;
+            ResultSet resultSet;
+            try {
+                connection = DriverManager.getConnection("jdbc:derby://localhost:1527/CIS454Database;create=true;user=CIS454;password=group19");
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(query);
+                if (resultSet.next()) {
                 usernameErr.setText("* This username is already taken");
                 usernameErr.setWrapText(true);
+                }
+                // Else, remove any existing label from the grid
+                else {
+                    usernameErr.setText("");
+                }
             }
-            // Else, remove any existing label from the grid
-            else {
-                usernameErr.setText("");
+            catch (SQLException e) {
+                System.out.println("SQL exception!");
             }
         });
         emailField.focusedProperty().addListener((observable, oldValue, newValue) -> {
