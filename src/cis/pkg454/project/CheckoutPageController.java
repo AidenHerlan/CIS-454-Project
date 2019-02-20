@@ -207,8 +207,9 @@ public class CheckoutPageController implements Initializable {
                     for(int i = 1; i <= shoppingCart.size(); i++) {
                         // Create Payment object
                         Payment userPayment = new Payment(
+                                1,
                                 shoppingCart.get(i).getId(), 
-                                shoppingCart.get(i).getSellerID(), 
+                                shoppingCart.get(i).getSeller(), 
                                 CIS454Project.currentUser.getId(),
                                 accountNumberField.getText(),
                                 routingNumberField.getText(),
@@ -333,8 +334,9 @@ public class CheckoutPageController implements Initializable {
                     for(int i = 1; i <= shoppingCart.size(); i++) {
                         // Create Payment object
                         Payment userPayment = new Payment(
+                                1, 
                                 shoppingCart.get(i).getId(), 
-                                shoppingCart.get(i).getSellerID(), 
+                                shoppingCart.get(i).getSeller(), 
                                 CIS454Project.currentUser.getId(),
                                 cardNumberField.getText(),
                                 cvvNumberField.getText(),

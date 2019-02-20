@@ -153,5 +153,4 @@ public class User {
 {
      this.isAdmin = value;
 }
-    
 }

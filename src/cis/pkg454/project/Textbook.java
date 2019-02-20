@@ -15,7 +15,7 @@ public class Textbook {
     private String author;
     private String isbn;
     private int id;
-    private int sellerID;
+    private int seller;
     
     
     // Constructor for making a new textbook, when an item is being added to the marketplace
@@ -26,7 +26,7 @@ public class Textbook {
         this.isbn = isbn;
         // Fill in once database is available
 //        this.id = last id in database + 1
-        this.sellerID = CIS454Project.currentUser.getId();
+        this.seller = CIS454Project.currentUser.getId();
     }
     
     // Constructor for modifying a textbook post
@@ -36,7 +36,7 @@ public class Textbook {
         this.author = author;
         this.isbn = isbn;
         this.id = oldBook.getId();
-        this.sellerID = CIS454Project.currentUser.getId();
+        this.seller = CIS454Project.currentUser.getId();
 
     }
     
@@ -80,9 +80,13 @@ public class Textbook {
 {
      this.isbn = value;
 }
-    public int getSellerID()
+    public int getSeller()
 {
-    return this.sellerID;
+    return this.seller;
+}
+    public void setSeller(int value)
+{
+    this.seller = value;
 }
 
     

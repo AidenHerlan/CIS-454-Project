@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -90,7 +91,7 @@ public class AddItemPageController implements Initializable {
     }
 
     @FXML
-    private void addItem(ActionEvent event) throws Exception {
+    private void addItem(ActionEvent event) throws Exception{
         // Make sure that all fields have valid input, if not, show an error message
         if (isbnErr.getText().length() != 0 || 
                 priceErr.getText().length() != 0 ||
@@ -103,22 +104,29 @@ public class AddItemPageController implements Initializable {
             return;
         }
         
-        // Create Textbook item and send to backend
-        Textbook newTextbook = new Textbook(nameField.getText(), Double.valueOf(priceField.getText()), authorField.getText(), isbnField.getText());
-        CIS454Project.addItem(newTextbook);
+        // Get the info and send it to backend
+        String textbookName = nameField.getCharacters().toString();
+        String author = authorField.getCharacters().toString();
+        double price = Double.parseDouble(priceField.getCharacters().toString());
+        String isbn = isbnField.getCharacters().toString();
+        int id = 0;  // get from backend
+        String seller = CIS454Project.currentUser.getName();
         
-        // Show success message and navigate back to main page
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setContentText("Your item has been added successfully.");
-        alert.showAndWait();
+        String query = "insert into Textbook values ("+textbookName+", "+price+", "+author+", "+isbn+id+seller+")";
         
+        // alert and transition after update is successful
+        Alert success = new Alert(AlertType.INFORMATION);
+        success.setTitle("Successful!");
+        success.setHeaderText(null);
+        success.setContentText("Your item has been successfully added!");
+        success.showAndWait();
+       
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         
-        Parent sellPageParent = FXMLLoader.load(getClass().getResource("SellPage.fxml"));
-        Scene sellPageScene = new Scene(sellPageParent);
+        Parent AddItemParent = FXMLLoader.load(getClass().getResource("SellPage.fxml"));
+        Scene AddItemScene = new Scene(AddItemParent);
         
-        window.setScene(sellPageScene);
+        window.setScene(AddItemScene);
         window.show();
     }
     

@@ -23,8 +23,8 @@ public class Payment {
     private double price;
     
     // Constructor for card payments
-    public Payment(int textbookID, int sellerID, int buyerID, String cardNum, String cardSecuCode, String cardExp, double price) {
-//        this.ID = ID; Set to be the highest ID + 1
+    public Payment(int ID, int textbookID, int sellerID, int buyerID, String cardNum, String cardSecuCode, String cardExp, double price) {
+        this.ID = ID;
         this.textbookID = textbookID;
         this.sellerID = sellerID;
         this.buyerID = buyerID;
@@ -36,8 +36,8 @@ public class Payment {
     }
     
     // Constructor for check payments
-    public Payment(int textbookID, int sellerID, int buyerID, String accNum, String routingNum, double price) {
-//        this.ID = ID; Set to be the highest ID + 1
+    public Payment(int ID, int textbookID, int sellerID, int buyerID, String accNum, String routingNum, double price) {
+        this.ID = ID;
         this.textbookID = textbookID;
         this.sellerID = sellerID;
         this.buyerID = buyerID;

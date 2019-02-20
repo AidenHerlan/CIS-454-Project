@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Feb 19 19:41:17 EST 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0169-0859-7eca-00000698b548 
+on database directory /Users/OliviaFlynn/Documents/School/College/CIS 454/CIS-454-Project/CIS454Database with class loader sun.misc.Launcher$AppClassLoader@42a57993 
+Loaded from file:/Users/OliviaFlynn/Documents/School/College/CIS%20454/CIS-454-Project/dist/run2015167019/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_144-b01
+user.dir=/Users/OliviaFlynn/Documents/School/College/CIS 454/CIS-454-Project
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.14.3
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

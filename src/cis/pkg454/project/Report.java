@@ -11,7 +11,7 @@ public class Report {
     private int id;
     private int reporteeId;
     private String type; // "USER", "POST", or "OTHER"
-    private String status; // "RESOLVED" or "UNRESOLVED"
+    private Boolean status;  // false for unsolved, true for solved
     private String description;
     private String comment;
     
@@ -19,7 +19,7 @@ public class Report {
     public Report(int reporteeID, String type, String description) {
         this.reporteeId = reporteeID;
         this.type = type;
-        this.status = "UNRESOLVED";
+        this.status = false;
         this.description = description;
         this.comment = "";
 //        this.id = highest id in backend + 1
@@ -59,11 +59,11 @@ public class Report {
 {
      this.type = value;
 }
-    public String getStatus()
+    public Boolean getStatus()
 {
     return this.status;
 }
-    public void setStatus(String value)
+    public void setStatus(Boolean value)
 {
      this.status = value;
 }
