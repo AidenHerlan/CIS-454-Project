@@ -48,7 +48,7 @@ public class CIS454Project extends Application {
      * @param password
      * @return 
      */
-    static public boolean login(String username, String password) throws SQLException  {
+    public static boolean login(String username, String password) throws SQLException  {
         // if username/password combo does not exist in database, return false
         Connection connection = makeConnection();
         Statement statement = connection.createStatement();
@@ -65,6 +65,29 @@ public class CIS454Project extends Application {
         String address = resultSet.getString("address");
         int userID = resultSet.getInt("userID");
         
+        query = "SELECT * FROM Textbook WHERE seller = "+userID;
+        resultSet = statement.executeQuery(query);
+        ArrayList<Textbook> sell = new ArrayList<>();
+        while (resultSet.next()) {
+            sell.add(new Textbook(resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getString("author"), resultSet.getString("isbn"), resultSet.getInt("textbookID"), resultSet.getInt("seller")));
+        }
+        
+        query = "SELECT textbookID FROM ShoppingCart WHERE userID = "+userID;
+        resultSet = statement.executeQuery(query);
+        ArrayList<Integer> textbookIDlist = new ArrayList<>();
+        while (resultSet.next()) {
+            textbookIDlist.add(resultSet.getInt("textbookID"));
+        }
+        ArrayList<Textbook> shop = new ArrayList<>();
+        for (int i = 0; i < textbookIDlist.size(); i++) {
+            int textbook = textbookIDlist.get(i);
+            query = "SELECT * FROM Textbook WHERE id = "+textbook;
+            resultSet = statement.executeQuery(query);
+            if (resultSet.next()) {
+                shop.add(new Textbook(resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getString("author"), resultSet.getString("isbn"), resultSet.getInt("textbookID"), resultSet.getInt("seller")));
+            }
+        }
+    
         // update the user object
         currentUser.setName(name);
         currentUser.setBalance(balance);
@@ -75,6 +98,8 @@ public class CIS454Project extends Application {
         currentUser.setPhoneNumber(phoneNumber);
         currentUser.setAddress(address);
         currentUser.setId(userID);
+        currentUser.setSellingBooks(sell);
+        currentUser.setShoppingCart(shop);
         
         return true;
     }
@@ -100,10 +125,14 @@ public class CIS454Project extends Application {
      * Checks if the username is already used by another user (returns false) or not (returns true)
      * @param username
      * @return 
-     */
-    static public boolean usernameAvailable(String username) {
-        // Check in the database
-        return true;
+     * @throws java.sql.SQLException 
+     */  
+     public static boolean usernameAvailable(String username) throws SQLException {
+        Connection connection = makeConnection();
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM UserTable WHERE username = '"+username+"'";
+        ResultSet resultSet = statement.executeQuery(query);
+        return !resultSet.next();
     }
     
     /**
@@ -120,33 +149,33 @@ public class CIS454Project extends Application {
      * Logs the user out of the application and deletes their record from the database
      * @param user 
      */
-    static public void deleteAccount(User user) {
+    static public void deleteAccount(User user) throws SQLException{
+        // Delete user from database, and all textbooks sold by this user
+        Connection connection = makeConnection();
+        Statement statement = connection.createStatement();
+        String query = "DELETE FROM UserTable WHERE userID = "+CIS454Project.currentUser.getId();
+        statement.executeUpdate(query);
+        
         // Log the user out of the application
         logout();
-        
-        // Delete user from database, and all textbooks sold by this user
-    }
-    
-    /**
-     * Creates a new user entry in the database
-     * @param newUser 
-     */
-    static public void registerUser(User newUser) {
-        // Set the user to the current user
-        currentUser = newUser;
-        
-        // Add the new user to the database
     }
     
     /**
      * Adds the specified item to the user's selling list and adds to the database of books being sold
      * @param item 
+     * @throws java.sql.SQLException 
      */
-    static public void addItem(Textbook item) {
+    static public void addItem(Textbook item) throws SQLException {
         // Add the item to the user's selling list
-        currentUser.getSellingBooks().add(item);
+        ArrayList<Textbook> alist = currentUser.getSellingBooks();
+        alist.add(item);
+        currentUser.setSellingBooks(alist);
         
-        // Add the item to the database of items being sold
+        // Add the item to Textbook table
+        Connection connection = makeConnection();
+        Statement statement = connection.createStatement();
+        String query = "INSERT into Textbook values ("+item.getId()+", '"+item.getName()+"', "+item.getPrice()+", '"+item.getAuthor()+"', '"+item.getIsbn()+"', "+item.getSeller()+")";
+        statement.executeUpdate(query);
     }
     
     /**
@@ -175,8 +204,12 @@ public class CIS454Project extends Application {
      * Adds the specified report to the database
      * @param report 
      */
-    static public void addReport(Report report) {
+    static public void addReport(Report report) throws SQLException {
         // Add the item to the database of reports
+        Connection connection = makeConnection();
+        Statement statement = connection.createStatement();
+        String query = "INSERT into Report values ("+report.getId()+", "+report.getRepoteeId()+", '"+report.getType()+"', "+report.getStatus()+", '"+report.getDescription()+"', '')";
+        statement.executeUpdate(query);
     }
     
     /**
@@ -185,6 +218,7 @@ public class CIS454Project extends Application {
      */
     static public void updateReport(Report report) {
         // Change the report's status to resolved
+        
     }
 
     /**
@@ -232,28 +266,34 @@ public class CIS454Project extends Application {
         // if "Textbook" is not there, create it and insert record
         tables = dbm.getTables(null, null, "TEXTBOOK", new String[] {"TABLE"});
         if (!tables.next()) {
-            query = "create table Textbook (textbookID integer not null, name varchar(50) not null, price double not null, author varchar(50), isbn varchar(13), seller integer not null, primary key (textbookID), foreign key (seller) references USERTABLE(userID))";
+            query = "create table Textbook (textbookID integer not null, name varchar(50) not null, price double not null, author varchar(50) not null, isbn varchar(13), seller integer not null, primary key (textbookID), foreign key (seller) references USERTABLE(userID))";
             statement.executeUpdate(query);
             query = "INSERT into Textbook (textbookID, name, price, author, seller) values (1, 'Hello World', 10.00, 'CIS454', 2)";
             statement.executeUpdate(query);
         }
         
-        
-        // if "Report" is not there, create it and insert record
-        tables = dbm.getTables(null, null, "REPORT", new String[] {"TABLE"});
+        // if "ShoppingCart" is not there, create it
+        tables = dbm.getTables(null, null, "SHOPPINGCART", new String[] {"TABLE"});
         if (!tables.next()) {
-            query = "create table Report (reportID integer not null, userID integer not null, type varchar(25) not null, status boolean, description varchar(500), comment varchar(500), primary key (reportID), foreign key (userID) REFERENCES USERTABLE(userID))";
+            query = "CREATE TABLE ShoppingCart (userID int NOT NULL, textbookID int NOT NULL, PRIMARY KEY (userID, textbookID), FOREIGN KEY (userID) REFERENCES UserTable(userID), FOREIGN KEY (textbookID) REFERENCES Textbook(textbookID))";
             statement.executeUpdate(query);
-            query = "INSERT into Report values (1, 2, 'issue', false, 'test', 'debug')";
+            query = "INSERT into ShopppingCart (2, 1)";
             statement.executeUpdate(query);
-        }
+        }      
         
         // if "Payment" is not there, create it and insert record
         tables = dbm.getTables(null, null, "PAYMENT", new String[] {"TABLE"});
         if (!tables.next()) {
-            query = "create table Payment (paymentID integer not null, textbookID integer not null, sellerID integer not null, buyerID integer, cardNum varchar(16), cardSecuCode varchar(3), cardExp varchar(4), accNum varchar(12), routingNum varchar(9), method boolean, primary key (paymentID), foreign key (textbookID) references TEXTBOOK(textbookID), foreign key (sellerID) references USERTABLE(userID), foreign key (buyerID) references USERTABLE(userID))";
+            query = "create table Payment (paymentID integer not null, name varchar(50) not null, price double not null, author varchar(50) not null, isbn varchar(13), sellerID integer not null, buyerID integer not null, cardNum varchar(16), cardSecuCode varchar(3), cardExp varchar(4), accNum varchar(12), routingNum varchar(9), method boolean, primary key (paymentID), foreign key (sellerID) references USERTABLE(userID), foreign key (buyerID) references USERTABLE(userID))";
             statement.executeUpdate(query);
-            query = "INSERT into Payment (paymentID, textbookID, sellerID, buyerID, cardNum, cardSecuCode, cardExp) values (1, 1, 2, 3, '1234123412341234', '123', '1234')";
+        }
+        
+        // if "Report" is not there, create it and insert record
+        tables = dbm.getTables(null, null, "REPORT", new String[] {"TABLE"});
+        if (!tables.next()) {
+            query = "create table Report (reportID integer not null, reporteeID integer not null, type varchar(5) not null, status boolean not null, description varchar(500) not null, comment varchar(500) not null, primary key (reportID))";
+            statement.executeUpdate(query);
+            query = "INSERT into Report values (1, 0, 'OTHER', false, 'not completed function for selling', '')";
             statement.executeUpdate(query);
         }
         
@@ -268,13 +308,64 @@ public class CIS454Project extends Application {
         return resultSet.getInt("maxUserID");
     }
     
-    public static Boolean uniqueUsername(String username) throws SQLException {
+    public static int maxReportID() throws SQLException {
         Connection connection = makeConnection();
         Statement statement = connection.createStatement();
-        String query = "SELECT * FROM UserTable WHERE username = '"+username+"'";
+        String query = "SELECT MAX(reportID) AS maxReportID FROM Report";
         ResultSet resultSet = statement.executeQuery(query);
-        if (resultSet.next()) return false;
-        return true;
+        resultSet.next();
+        return resultSet.getInt("maxReportID");
+    }
+    
+    public static int maxTextbookID() throws SQLException {
+        Connection connection = makeConnection();
+        Statement statement = connection.createStatement();
+        String query = "SELECT MAX(textbookID) AS maxTextbookID FROM Textbook";
+        ResultSet resultSet = statement.executeQuery(query);
+        resultSet.next();
+        return resultSet.getInt("maxTextbookID");
+    }
+    
+    public static ArrayList<Report> resolved() throws SQLException {
+        Connection connection = CIS454Project.makeConnection();
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM Report WHERE status = true";
+        ResultSet resultSet = statement.executeQuery(query);
+        
+        ArrayList<Report> alist = new ArrayList<>();
+        while (resultSet.next()) {
+            alist.add(new Report(resultSet.getInt("reportID"), resultSet.getInt("reporteeID"), resultSet.getString("type"), resultSet.getString("description"), resultSet.getBoolean("status"), resultSet.getString("comment")));
+        }
+        
+        return alist;
+    }
+    
+    public static ArrayList<Report> unresolved() throws SQLException {
+        Connection connection = CIS454Project.makeConnection();
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM Report WHERE status = false";
+        ResultSet resultSet = statement.executeQuery(query);
+        
+        ArrayList<Report> alist = new ArrayList<>();
+        while (resultSet.next()) {
+            alist.add(new Report(resultSet.getInt("reportID"), resultSet.getInt("reporteeID"), resultSet.getString("type"), resultSet.getString("description"), resultSet.getBoolean("status"), resultSet.getString("comment")));
+        }
+        
+        return alist;
+    }
+    
+    public static ArrayList<Textbook> getTextbook(String search) throws SQLException {
+        Connection connection = CIS454Project.makeConnection();
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM Textbook WHERE name = '"+search+"' OR author = '"+search+"' OR isbn = '"+search+"'";
+        ResultSet resultSet = statement.executeQuery(query);
+        
+        ArrayList<Textbook> alist = new ArrayList<>();
+        while (resultSet.next()) {
+            alist.add(new Textbook(resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getString("author"), resultSet.getString("isbn"), resultSet.getInt("textbookID"), resultSet.getInt("seller")));
+        }
+        
+        return alist;
     }
     
     public static void main(String[] args) throws SQLException {

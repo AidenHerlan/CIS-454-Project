@@ -6,6 +6,8 @@
 package cis.pkg454.project;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -171,6 +173,12 @@ public class MainPageController implements Initializable {
         
         window.setScene(adminManagementPageScene);
         window.show();
+    }
+
+    @FXML
+    private void search(ActionEvent event) throws SQLException {
+        ArrayList<Textbook> alist = CIS454Project.getTextbook(searchBar.getText());
+        
     }
     
 }

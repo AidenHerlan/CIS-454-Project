@@ -19,14 +19,13 @@ public class Textbook {
     
     
     // Constructor for making a new textbook, when an item is being added to the marketplace
-    public Textbook(String name, double price, String author, String isbn) {
+    public Textbook(String name, double price, String author, String isbn, int id, int seller) {
         this.name = name;
         this.price = price;
         this.author = author;
         this.isbn = isbn;
-        // Fill in once database is available
-//        this.id = last id in database + 1
-        this.seller = CIS454Project.currentUser.getId();
+        this.id = id;
+        this.seller = seller;
     }
     
     // Constructor for modifying a textbook post

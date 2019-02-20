@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -71,6 +73,7 @@ public class AccountInfoPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // get user object, fill labels
+        titleText.setText("Account Info for "+CIS454Project.currentUser.getUsername());
         usernameText.setText("Username: "+CIS454Project.currentUser.getUsername());
         nameText.setText("Name: "+CIS454Project.currentUser.getName());
         emailText.setText("Email: "+CIS454Project.currentUser.getEmail());
@@ -96,7 +99,7 @@ public class AccountInfoPageController implements Initializable {
      * @param event 
      */
     @FXML
-    private void editInfoPrompt(ActionEvent event) {
+    private void editInfoPrompt(ActionEvent event) throws SQLException {
         // Create Dialog window
         Dialog<?> dialog = new Dialog<>();
         dialog.setTitle("Edit Account Info");
@@ -130,25 +133,24 @@ public class AccountInfoPageController implements Initializable {
         usernameField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             // Build connection with backend and check if username is duplicate, create and add label notifying user
             String username = usernameField.getCharacters().toString();
-            String query = "SELECT * FROM UserTable WHERE username = '"+username+"'";;
-            Connection connection;
+            String query = "SELECT * FROM UserTable WHERE username = '"+username+"'";
+            Connection connection = null;
             Statement statement;
             ResultSet resultSet;
             try {
-                connection = DriverManager.getConnection("jdbc:derby://localhost:1527/CIS454Database;create=true;user=CIS454;password=group19");
+                connection = CIS454Project.makeConnection();
                 statement = connection.createStatement();
                 resultSet = statement.executeQuery(query);
-                if (resultSet.next()) {
-                usernameErr.setText("* This username is already taken");
-                usernameErr.setWrapText(true);
+                if (resultSet.next() && !(CIS454Project.currentUser.getUsername().equals(username))) {
+                    usernameErr.setText("* This username is already taken");
+                    usernameErr.setWrapText(true);
                 }
                 // Else, remove any existing label from the grid
                 else {
                     usernameErr.setText("");
                 }
-            }
-            catch (SQLException e) {
-                System.out.println("SQL exception!");
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountInfoPageController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         emailField.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -209,22 +211,45 @@ public class AccountInfoPageController implements Initializable {
             // Otherwise, create a new user object with updated information. Use it to 
             // update the app state
             else {
+                String username = usernameField.getText();
+                String email = emailField.getText();
+                String password;
+                if (passwordField.getText().equals("")) password = CIS454Project.currentUser.getPassword();
+                else password = passwordField.getText();
+                String name = nameField.getText();
+                String address = locationField.getText();
+                String phoneNumber = phoneNumberField.getText();
                 User updatedUser = new User(
                         CIS454Project.currentUser, 
-                        usernameField.getText(), 
-                        emailField.getText(), 
-                        passwordField.getText(),
-                        nameField.getText(),
-                        locationField.getText(),
-                        phoneNumberField.getText());
+                        username, 
+                        email, 
+                        password,
+                        name,
+                        address,
+                        phoneNumber);
                 
                 // Pass updated user object to be added to database
                 CIS454Project.updateUser(updatedUser);
+                
+                // update database
+                Connection connection = CIS454Project.makeConnection();
+                Statement statement = connection.createStatement();
+                String query = "UPDATE UserTable SET username = '"+username+"', email = '"+email+"', password = '"+password+"', name = '"+name+"', address = '"+address+"', phoneNumber = '"+phoneNumber+"' WHERE userID = "+CIS454Project.currentUser.getId();
+                statement.executeUpdate(query);
+                
                 
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Information Updated");
                 alert.setContentText("Your information has been successfully updated. Reload the page to see changes.");
                 alert.showAndWait();
+                
+                titleText.setText("Account Info for "+CIS454Project.currentUser.getUsername());
+                usernameText.setText("Username: "+CIS454Project.currentUser.getUsername());
+                nameText.setText("Name: "+CIS454Project.currentUser.getName());
+                emailText.setText("Email: "+CIS454Project.currentUser.getEmail());
+                addressText.setText("Address: "+CIS454Project.currentUser.getAddress());
+                phoneNumberText.setText("Phone Number: "+CIS454Project.currentUser.getPhoneNumber());
+                idText.setText("Accouunt ID: "+CIS454Project.currentUser.getId());
             }
         }
     }

@@ -64,7 +64,7 @@ public class RegisterPageController implements Initializable {
         }
         // If fields are valid, check if username is unique
         String username = usernameField.getCharacters().toString();
-        if (!CIS454Project.uniqueUsername(username)) {
+        if (!CIS454Project.usernameAvailable(username)) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Username has been used");
             alert.setHeaderText(null);

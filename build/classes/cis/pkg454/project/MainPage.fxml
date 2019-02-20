@@ -44,9 +44,9 @@
                               <Insets left="100.0" right="100.0" top="85.0" />
                            </VBox.margin>
                         </TextField>
-                        <Button fx:id="searchBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="558.0" style="-fx-background-color: #c9deff;" text="Go">
+                        <Button fx:id="searchBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#search" prefHeight="30.0" prefWidth="500.0" style="-fx-background-color: #c9deff;" text="Go">
                            <VBox.margin>
-                              <Insets left="260.0" right="260.0" top="10.0" />
+                              <Insets left="200.0" right="200.0" top="10.0" />
                            </VBox.margin>
                         </Button>
                         <TableView prefHeight="370.0" prefWidth="557.0">

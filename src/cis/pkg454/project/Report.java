@@ -4,25 +4,26 @@
  * and open the template in the editor.
  */
 package cis.pkg454.project;
+
 /*
  * @author Aiden
  */
 public class Report {
     private int id;
-    private int reporteeId;
+    private int reporteeId;  // 0 means no reporteeID
     private String type; // "USER", "POST", or "OTHER"
     private Boolean status;  // false for unsolved, true for solved
     private String description;
     private String comment;
     
-    // Constructor for making a new report
-    public Report(int reporteeID, String type, String description) {
+    // Constructor for making a new report with reporteeID
+    public Report(int id, int reporteeID, String type, String description, boolean status, String comment) {
         this.reporteeId = reporteeID;
         this.type = type;
-        this.status = false;
+        this.status = status;
         this.description = description;
-        this.comment = "";
-//        this.id = highest id in backend + 1
+        this.comment = comment;
+        this.id = id;
     }
     
     // Constructor for updating a report

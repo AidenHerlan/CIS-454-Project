@@ -57,6 +57,8 @@ public class ReportIssuePageController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -92,7 +94,7 @@ public class ReportIssuePageController implements Initializable {
     @FXML
     private void sendReport(ActionEvent event) throws Exception {
         // If input is invalid, show an error message
-        if ((!idErr.getText().equals("") && !otherReportRB.isSelected()) || reportText.getText().length() == 0) {
+        if ((!idErr.getText().equals("") && !otherReportRB.isSelected()) || reportText.getText().length() == 0 || (!idField.getCharacters().toString().matches("[0-9]+") && !idField.getCharacters().toString().matches(""))) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Invalid Input");
             alert.setContentText("Please input valid information in all fields");
@@ -112,7 +114,9 @@ public class ReportIssuePageController implements Initializable {
             type = "OTHER";
         }
         
-        Report newReport = new Report(Integer.valueOf(idField.getText()), type, reportText.getText());
+        Report newReport;
+        if (idField.getText().equals("")) newReport = new Report(CIS454Project.maxReportID()+1, 0, type, reportText.getText(), false, "");
+        else newReport = new Report(CIS454Project.maxReportID()+1, Integer.valueOf(idField.getText()), type, reportText.getText(), false, "");
         CIS454Project.addReport(newReport);
         
         // Show success message and navigate back to main page

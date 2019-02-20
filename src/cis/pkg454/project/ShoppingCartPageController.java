@@ -48,7 +48,7 @@ public class ShoppingCartPageController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // display shopping cart of the current user
     }    
 
     @FXML

@@ -111,15 +111,15 @@ public class User {
 }
     public void setAddress(String value)
 {
-     this.phoneNumber = value;
+     this.address = value;
 }
     public String getPhoneNumber()
 {
-    return this.address;
+    return this.phoneNumber;
 }
     public void setPhoneNumber(String value)
 {
-     this.phoneNumber = value;
+    this.phoneNumber = value;
 }
      public double getBalance()
 {

@@ -6,6 +6,7 @@
 package cis.pkg454.project;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,10 +52,22 @@ public class ReviewReportsPageController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // show all reports
+        ArrayList<Report> resolved; 
+        ArrayList<Report> unresolved;
+        try {
+            resolved = CIS454Project.resolved();
+            unresolved = CIS454Project.unresolved();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
     }    
 
     @FXML
